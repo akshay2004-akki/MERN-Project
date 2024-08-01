@@ -1,1 +1,1 @@
-export const DB_NAME = "contentgeneration"
+export const DB_NAME = "ecotrack"
