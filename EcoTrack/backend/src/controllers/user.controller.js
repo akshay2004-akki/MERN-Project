@@ -169,3 +169,33 @@ export const refreshAccessToken = asyncHandler(async (req,res)=>{
     }
 
 })
+
+export const changePassword = asyncHandler(async(req,res)=>{
+    const {oldPassword, newPassword, confirmPassword} = req.body;
+
+    const user = await User.findById(req.user?._id);
+
+    if([oldPassword, newPassword, confirmPassword].some(field=> field.trim()==="")){
+        res.status(400).send("All fields are required");
+        throw new ApiError(400,"All fields are required")
+    }
+    if(oldPassword!==user.password){
+        res.status(409).send("Incorrect Old password");
+        throw new ApiError(409,"Incorrect Old password"); 
+    }
+    if(newPassword===oldPassword){
+        res.status(409).send("Old and New password must be different");
+        throw new ApiError(409,"Old and New password must be different");
+    }
+    if(newPassword!==confirmPassword){
+        res.status(409).send("Confirm password must be same as New password");
+    }
+
+    user.password = newPassword;
+    await user.save({validateBeforeSave:false});
+
+    return res
+            .status(200)
+            .json(new ApiResponse(200,{},"Password changed successfully"))
+
+})
