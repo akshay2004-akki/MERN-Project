@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+import jwt from 'jsonwebtoken'
 
 const userSchema = new mongoose.Schema(
   {
@@ -28,6 +29,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    refreshToken : {
+      type : String,
+    }
   },
   { timestamps: true }
 );
@@ -48,7 +52,7 @@ userSchema.methods.getAccessToken = function () {
     {
       _id: this._id,
       email: this.email,
-      username: this.username,
+      fullName: this.fullName,
       role: this.role,
     },
     process.env.ACCESS_TOKEN_SECRET,

@@ -1,0 +1,105 @@
+import asyncHandler from "../utils/asyncHandler.js";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { User } from "../models/user.model.js";
+import { uploadOnCloudinary } from "../utils/uploadOnCloudinary.js";
+
+const getAccessAndRefreshToken = async (userId)=>{
+    const user = await User.findById(userId);
+
+    const accessToken = await user.getAccessToken();
+    const refreshToken = await user.getRefreshToken();
+
+    user.refreshToken = refreshToken;
+    await user.save({validateBeforeSave:false})
+
+    return {refreshToken, accessToken};
+}
+
+export const registerUser = asyncHandler(async(req,res)=>{
+    const {fullName, email, password, role} = req.body;
+    
+
+    if([fullName, email, password, role].some((field)=>field?.trim()==="")){
+        res.status(400).send("All fields are required")
+        throw new ApiError(400,"All fields are required")
+    }
+
+    const existedUser = await User.findOne({email});
+    if(existedUser){
+        res.status(409).send("User already exist with this email")
+        throw new ApiError("User already exist with this email")
+    }
+
+    const avatarLocalPath = req.files?.avatar[0]?.path;
+    if(!avatarLocalPath){
+        res.status(401).send("Avatar is required");
+        throw new ApiError("Avatar is required")
+    }
+
+    const avatar = await uploadOnCloudinary(avatarLocalPath)
+
+    const newUser = await User.create({
+        fullName,
+        email,
+        password,
+        role,
+        avatar : avatar.url
+    })
+    if(!newUser){
+        res.status(400).send("Network Error");
+        throw new ApiError("Network Error")
+    }
+
+    res.status(201).json(new ApiResponse(201,newUser,"User created successfully"))
+})
+
+export const loginUser = asyncHandler(async(req,res)=>{
+    const {email, password} = req.body;
+
+    if([email,password].some(field=>field?.trim()==="")){
+        res.status(400).send("Enter the required field")
+        throw new ApiError(400,"Enter the required field")
+    }
+
+    const user = await User.findOne({email});
+
+    if(!user){
+        res.status(404).send("User Not Found")
+        throw new ApiError(404,"User Not Found")
+    }
+
+    const isPasswordCorrect = await user.comparePassword(password);
+
+    if(!isPasswordCorrect){
+        res.status(409).send("Incorrect Password")
+        throw new ApiError(409,"Incorrect Pasword")
+    }
+
+    const {refreshToken, accessToken} = await getAccessAndRefreshToken(user?._id)
+
+    const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
+
+    const options = {
+        httpOnly : true,
+        secure : false
+    }
+
+    return res
+        .status(200)
+        .cookie("accessToken", accessToken, options)
+        .cookie("refreshToken", refreshToken, options)
+        .json(new ApiResponse(200, loggedInUser, "User logged Successfully"))
+
+}) 
+
+export const logOutUser = asyncHandler(async(req,res)=>{
+    
+})
+
+export const getUserDetails = asyncHandler(async(req,res)=>{
+    const user = req.user;
+    return res
+            .status(200)
+            .json(new ApiResponse(200, user, "User data fetched successfully"))
+})
