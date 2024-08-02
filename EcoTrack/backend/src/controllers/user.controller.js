@@ -125,7 +125,7 @@ export const getUserDetails = asyncHandler(async(req,res)=>{
 })
 
 export const refreshAccessToken = asyncHandler(async (req,res)=>{
-    console.log(req.cookies.refreshToken);
+    //console.log(req.cookies.refreshToken);
     const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken
 
     if(!incomingRefreshToken){
@@ -133,7 +133,7 @@ export const refreshAccessToken = asyncHandler(async (req,res)=>{
     }
 
     const decodedToken = jwt.verify(incomingRefreshToken, process.env.REFRESH_TOKEN_SECRET)
-    console.log(decodedToken);
+    //console.log(decodedToken);
 
     try {
         const user = await User.findById(decodedToken?._id);
