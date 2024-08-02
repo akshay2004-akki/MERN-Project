@@ -179,7 +179,10 @@ export const changePassword = asyncHandler(async(req,res)=>{
         res.status(400).send("All fields are required");
         throw new ApiError(400,"All fields are required")
     }
-    if(oldPassword!==user.password){
+
+    const isPasswordCorrect = await user.comparePassword(oldPassword);
+
+    if(!isPasswordCorrect){
         res.status(409).send("Incorrect Old password");
         throw new ApiError(409,"Incorrect Old password"); 
     }
