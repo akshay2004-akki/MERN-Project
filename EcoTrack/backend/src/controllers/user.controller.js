@@ -202,3 +202,48 @@ export const changePassword = asyncHandler(async(req,res)=>{
             .json(new ApiResponse(200,{},"Password changed successfully"))
 
 })
+
+export const updateUserAvatar =asyncHandler (async (req,res)=>{
+    const avatarLocalPath = req.file?.path
+
+    if(!avatarLocalPath){
+        throw new ApiError(400, "avatar file is missing")
+    }
+
+    const avatar = await uploadOnCloudinary(avatarLocalPath)
+
+    if(!avatar){
+        throw new ApiError(400,"Error while uploading avatar")
+    }
+
+    const user = await User.findByIdAndUpdate(req.user?._id, {
+        avatar : avatar.url
+    }, {new:true}).select("-password")
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(
+            200,
+            user,
+            "Avatar Updated successfully"
+        )
+    )
+
+
+})
+
+export const updateAccountDetails = asyncHandler(async(req,res)=>{
+    const {fullName, email} = req.body;
+
+    if([fullName, email].some(field=>field.trim()==="")){
+        res.status(400).send("All fields are required");
+        throw new ApiError(400,"All fields are required");
+    }
+
+    const user = await User.findByIdAndUpdate(req.user?._id,{fullName,email},{new:true}).select("-password -refreshToken");
+
+    return res
+            .status(200)
+            .json(new ApiResponse(200,user,"User details updated successfully"))
+})
