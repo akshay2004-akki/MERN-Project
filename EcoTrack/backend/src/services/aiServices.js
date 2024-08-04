@@ -33,13 +33,15 @@ export const predictCarbonEmissionsFromSurvey = async (surveyData) => {
             - Waste: ${wasteGenerated} waste generated with ${recyclingRate} recycling rate
             - Heating: ${heatingType} heating system
             - Cooling: ${coolingUsage} energy usage per month
-            Provide an estimate value of total CO2 emissions per year. And give a list of 20 tasks that an individual can do on his level to reduce it.
+            Provide an estimate value of total CO2 emissions per year and higlight the estimated value. And give a list of new 20 tasks that an individual can do on his level to reduce it.
         `;
 
         const result = await model.generateContent(prompt); 
         const response = await result.response;
-        console.log(response.text());
-        return response.text();
+        const processedResponse = response.text().replace(/\*\*(.*?)\*\*/g, '<strong class="highlight">$1</strong>');
+        console.log(processedResponse);
+        
+        return processedResponse;
     } catch (error) {
         throw new ApiError(400, error.message);
     }
