@@ -20,6 +20,9 @@ app.use(express.static("public"))
 app.use(cookieParser())
 
 import userRouter from './routes/user.routes.js'
+import aiRoutes from './routes/ai.routes.js'
+
 app.use("/api/v4/users", userRouter)
+app.use('/api/v4/ai', aiRoutes);
 
 export default app
