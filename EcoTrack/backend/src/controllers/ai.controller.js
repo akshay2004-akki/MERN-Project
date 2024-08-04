@@ -8,18 +8,15 @@ export const getCarbonFootprintPrediction = async (req, res) => {
     try {
         const surveyData = req.body;
 
-        // Save survey response
         const surveyResponse = await SurveyResponse.create({
             userId: req.user.id,
             ...surveyData
         });
 
-        // Generate prediction
         const prediction = await predictCarbonEmissionsFromSurvey(surveyData);
         console.log(prediction);
         
 
-        // Save prediction
         await AiPrediction.create({
             userId: req.user.id,
             surveyResponseId: surveyResponse._id,
