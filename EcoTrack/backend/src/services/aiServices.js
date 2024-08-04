@@ -33,7 +33,7 @@ export const predictCarbonEmissionsFromSurvey = async (surveyData) => {
             - Waste: ${wasteGenerated} waste generated with ${recyclingRate} recycling rate
             - Heating: ${heatingType} heating system
             - Cooling: ${coolingUsage} energy usage per month
-            Provide an estimate of CO2 emissions per year and suggest ways to reduce it.
+            Provide an estimate value of total CO2 emissions per year. And give a list of 20 tasks that an individual can do on his level to reduce it.
         `;
 
         const result = await model.generateContent(prompt);
