@@ -36,7 +36,7 @@ export const predictCarbonEmissionsFromSurvey = async (surveyData) => {
             Provide an estimate value of total CO2 emissions per year. And give a list of 20 tasks that an individual can do on his level to reduce it.
         `;
 
-        const result = await model.generateContent(prompt);
+        const result = await model.generateContent(prompt); 
         const response = await result.response;
         console.log(response.text());
         return response.text();
