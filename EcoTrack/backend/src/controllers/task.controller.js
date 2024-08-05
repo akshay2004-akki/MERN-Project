@@ -16,8 +16,9 @@ export const generateTasks = asyncHandler(async(req,res)=>{
         const response = result.response;
     
         // console.log((response.text()));
+        const cleanedText = response.text().replace(/##.*/g, "");
 
-        const tasksArray = response.text()
+        const tasksArray = cleanedText
         .split(/\d+\.\s+/)   // Split by number followed by period and space
         .filter(task => task.trim() !== "" && task.trim() !== "\n") // Filter out any empty strings
         .map(task => task.replace(/\*\*/g, "").trim());
