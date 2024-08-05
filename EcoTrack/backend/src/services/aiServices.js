@@ -1,9 +1,11 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import dotenv from 'dotenv';
 import { ApiError } from '../utils/ApiError.js';
+// import {OpenAI} from 'openai'
 dotenv.config();
 
 const client = new GoogleGenerativeAI(process.env.GENERATIVE_AI_API);
+// const openai = new OpenAI({apiKey : process.env.OPEN_AI_API})
 
 export const predictCarbonEmissionsFromSurvey = async (surveyData) => {
     try {
@@ -25,9 +27,14 @@ export const predictCarbonEmissionsFromSurvey = async (surveyData) => {
         const latitude = surveyData.latitude;
         const longitude = surveyData.longitude
 
-        // const location = await model.generateContent(`Give me only the location name with latitude : ${latitude} and longitude : ${longitude}`)
-        // const locRes = await location.response.text();
-        // console.log(loc);
+        // const completion = await openai.chat.completions.create({
+        //     messages: [{ role: "system", content: `Give me only the name of the location with latitude : ${latitude} and longitude : ${longitude}` }],
+        //     model: "gpt-4o-mini",
+        //   });
+        
+        //   const location = await completion.data.choices[0].text.trim()
+        //   console.log(location);
+          
         
         // Generate the AI prompt using the above data points
         const prompt = `
