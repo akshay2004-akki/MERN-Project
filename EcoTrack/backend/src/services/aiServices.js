@@ -22,7 +22,13 @@ export const predictCarbonEmissionsFromSurvey = async (surveyData) => {
         const recyclingRate = surveyData.recyclingRate || 'unknown'; // Percentage of waste recycled
         const heatingType = surveyData.heatingType || 'unknown'; // Type of heating system
         const coolingUsage = surveyData.coolingUsage || 'unknown'; // Energy usage for cooling per month
+        const latitude = surveyData.latitude;
+        const longitude = surveyData.longitude
 
+        // const location = await model.generateContent(`Give me only the location name with latitude : ${latitude} and longitude : ${longitude}`)
+        // const locRes = await location.response.text();
+        // console.log(loc);
+        
         // Generate the AI prompt using the above data points
         const prompt = `
             Predict the carbon emissions for a user based on the following data:
@@ -33,7 +39,7 @@ export const predictCarbonEmissionsFromSurvey = async (surveyData) => {
             - Waste: ${wasteGenerated} waste generated with ${recyclingRate} recycling rate
             - Heating: ${heatingType} heating system
             - Cooling: ${coolingUsage} energy usage per month
-            Provide an estimate value of total CO2 emissions per year and higlight the estimated value.
+            Please Provide only an estimate value of total CO2 emissions per year and higlight the estimated value. And please dont include this line : "It's impossible to give a precise carbon emissions estimate without more specific data" just provide the estimate value of CO2 emmited and also provide the details calculation for estimated values.
         `;
 
         const result = await model.generateContent(prompt); 
