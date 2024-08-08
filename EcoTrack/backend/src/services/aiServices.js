@@ -1,59 +1,52 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import dotenv from 'dotenv';
 import { ApiError } from '../utils/ApiError.js';
-// import {OpenAI} from 'openai'
 dotenv.config();
 
 const client = new GoogleGenerativeAI(process.env.GENERATIVE_AI_API);
-// const openai = new OpenAI({apiKey : process.env.OPEN_AI_API})
 
 export const predictCarbonEmissionsFromSurvey = async (surveyData) => {
     try {
         const model = client.getGenerativeModel({ model: "gemini-1.5-flash" });
-        
-        // Extract necessary data points, with default values if not provided
-        const energyUsage = surveyData.energyUsage || 'unknown'; // kWh/month
-        const energySource = surveyData.energySource || 'mixed'; // Source mix e.g., solar, wind, coal
-        const vehicleType = surveyData.vehicleType || 'unknown'; // e.g., Gasoline car, Electric car
-        const milesDriven = surveyData.milesDriven || 0; // miles per month
-        const publicTransportTrips = surveyData.publicTransportTrips || 0; // trips per month
-        const flightsPerYear = surveyData.flightsPerYear || 0; // Number of flights per year
-        const flightDistance = surveyData.flightDistance || 'unknown'; // e.g., short-haul, long-haul
-        const dietType = surveyData.dietType || 'mixed'; // e.g., vegetarian, non-vegetarian
-        const wasteGenerated = surveyData.wasteGenerated || 'unknown'; // Amount of waste per week/month
-        const recyclingRate = surveyData.recyclingRate || 'unknown'; // Percentage of waste recycled
-        const heatingType = surveyData.heatingType || 'unknown'; // Type of heating system
-        const coolingUsage = surveyData.coolingUsage || 'unknown'; // Energy usage for cooling per month
-        const latitude = surveyData.latitude;
-        const longitude = surveyData.longitude
 
-        // const completion = await openai.chat.completions.create({
-        //     messages: [{ role: "system", content: `Give me only the name of the location with latitude : ${latitude} and longitude : ${longitude}` }],
-        //     model: "gpt-4o-mini",
-        //   });
-        
-        //   const location = await completion.data.choices[0].text.trim()
-        //   console.log(location);
-          
-        
-        // Generate the AI prompt using the above data points
+        // Extract descriptive data points
+        const energyUsageDescription = surveyData.energyUsageDescription || 'No description provided';
+        const energySourceDescription = surveyData.energySourceDescription || 'No description provided';
+        const vehicleTypeDescription = surveyData.vehicleTypeDescription || 'No description provided';
+        const transportationHabits = surveyData.transportationHabits || 'No description provided';
+        const flightHabits = surveyData.flightHabits || 'No description provided';
+        const dietDescription = surveyData.dietDescription || 'No description provided';
+        const wasteManagementDescription = surveyData.wasteManagementDescription || 'No description provided';
+        const heatingUsageDescription = surveyData.heatingUsageDescription || 'No description provided';
+        const coolingUsageDescription = surveyData.coolingUsageDescription || 'No description provided';
+        const latitude = surveyData.latitude;
+        const longitude = surveyData.longitude;
+
+        // You can integrate the location logic here to use latitude and longitude
+        // with a suitable service, such as an external API for location lookup
+
+        // Generate the AI prompt using descriptive data points
         const prompt = `
-            Predict the carbon emissions for a user based on the following data:
-            - Energy Usage: ${energyUsage} kWh/month from ${energySource}
-            - Transportation: ${vehicleType} driven ${milesDriven} miles per month, ${publicTransportTrips} public transport trips per month
-            - Flights: ${flightsPerYear} flights per year (${flightDistance} flights)
-            - Diet: ${dietType}
-            - Waste: ${wasteGenerated} waste generated with ${recyclingRate} recycling rate
-            - Heating: ${heatingType} heating system
-            - Cooling: ${coolingUsage} energy usage per month
-            Please Provide only an estimate value of total CO2 emissions per year and higlight the estimated value. And please dont include this line : "It's impossible to give a precise carbon emissions estimate without more specific data" just provide the estimate value of CO2 emmited and also provide the details calculation for estimated values.
+            Predict the carbon emissions for a user based on the following lifestyle descriptions:
+            - Energy Usage: ${energyUsageDescription}
+            - Energy Source: ${energySourceDescription}
+            - Transportation: ${vehicleTypeDescription}
+            - Transportation Habits: ${transportationHabits}
+            - Flights: ${flightHabits}
+            - Diet: ${dietDescription} 
+            - Waste Management: ${wasteManagementDescription}
+            - Heating Usage: ${heatingUsageDescription}
+            - Cooling Usage: ${coolingUsageDescription}
+
+            Please provide an estimated value of total CO2 emissions per year and highlight the estimated value. 
+            Provide detailed calculations for the estimated values. And don't include these types of sentences "It's impossible to provide a precise carbon emission estimate without specific data"
         `;
 
-        const result = await model.generateContent(prompt); 
+        const result = await model.generateContent(prompt);
         const response = await result.response;
         const processedResponse = response.text().replace(/\*\*(.*?)\*\*/g, '<strong class="highlight">$1</strong>');
         console.log(processedResponse);
-        
+
         return processedResponse;
     } catch (error) {
         throw new ApiError(400, error.message);
