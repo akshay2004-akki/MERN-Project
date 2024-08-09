@@ -5,6 +5,8 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import { Task } from "../models/task.model.js";
 
+dotenv.config();
+
 const genAi = new GoogleGenerativeAI(process.env.GENERATIVE_AI_API)
 
 export const generateTasks = asyncHandler(async(req,res)=>{
@@ -35,7 +37,7 @@ export const generateTasks = asyncHandler(async(req,res)=>{
 })
 
 export const updateTasks = asyncHandler(async (req, res) => {
-    const userId = req.task?._id; // Assuming the user ID is stored in req.task._id
+    const userId = req.user?._id; // Assuming the user ID is stored in req.task._id
     const { tasksCompleted } = req.body;
 
     if (!tasksCompleted) {
@@ -59,3 +61,18 @@ export const updateTasks = asyncHandler(async (req, res) => {
 
     return res.status(200).json(new ApiResponse(200, task, "Tasks updated successfully"));
 });
+
+export const getTasks = asyncHandler(async(req,res)=>{
+    const userId = req.user?._id;
+    const task = await Task.findOne({userId});
+
+    if(!task){
+        res.status(400).send("Tasks Not available");
+        throw new ApiError(400, "Tasks Not available")
+    }
+
+    const completedTasks = task.tasksCompleted
+
+    res.status(200).json(new ApiResponse(200, completedTasks,"Task fetched successfully"))
+})
+
