@@ -21,8 +21,10 @@ app.use(cookieParser())
 
 import userRouter from './routes/user.routes.js'
 import aiRoutes from './routes/ai.routes.js'
+import blogRoutes from './routes/blog.routes.js'
 
 app.use("/api/v4/users", userRouter)
 app.use('/api/v4/ai', aiRoutes);
+app.use("/api/v4/blogs", blogRoutes)
 
 export default app
