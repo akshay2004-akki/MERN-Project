@@ -1,5 +1,9 @@
 import './App.css';
 import {useEffect, useState} from 'react'
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import Navbar from './components/Navbar.js';
+import Home from './components/Home.js';
+import Webinar from './components/Webinar.js';
 
 function App() {
 
@@ -18,7 +22,13 @@ function App() {
 
   return (
     <>
-      {lat} <br /> {lon}
+      <Router>
+        <Navbar/>
+        <Routes>
+          <Route path='/' element = {<Home/>} />
+          <Route path='/webinar' element = {<Webinar/>} />
+        </Routes>
+      </Router>
     </>
   );
 }
