@@ -50,7 +50,7 @@ export const updatePost = asyncHandler(async(req,res)=>{
         throw new ApiError(400,"Both the fields are necessary")   
     }
 
-    if(!blogId || isValidObjectId(blogId)){
+    if(!blogId || !isValidObjectId(blogId)){
         throw new ApiError(400,"Invalid Object Id")
     }
 
@@ -61,7 +61,7 @@ export const updatePost = asyncHandler(async(req,res)=>{
             .json(new ApiResponse(200, blog, "Blog Updated Successfully"))
 
 
-})
+}) 
 
 export const getUserPosts = asyncHandler(async (req, res) => {
     const userId = req.user?._id; // Assuming the user ID is stored in the JWT and added to req.user
@@ -86,4 +86,21 @@ export const getUserPosts = asyncHandler(async (req, res) => {
       console.error(error);
       throw new ApiError(500, "Failed to fetch user's blog posts");
     }
-  });
+});
+
+export const deletePost = asyncHandler((async(req,res)=>{
+    const {blogId} = req.params;
+    if(!blogId || !isValidObjectId(blogId)){
+        throw new ApiError(405, "Tweet Id is not valid")
+    }
+
+    try {
+        await Blog.findByIdAndDelete(blogId);
+
+        return res.status(200).json(new ApiResponse(200,null, "Tweet deleted successfully"))
+        
+    } catch (error) {
+        throw new ApiError(404, error?.message)
+    }
+
+}))
