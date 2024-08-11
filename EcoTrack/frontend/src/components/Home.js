@@ -3,7 +3,7 @@ import React from 'react'
 function Home() {
   return (
     <>
-      <div className='landing-page' style={{height:"100vh", transform:"translateY(100px)"}}>
+      <div className='landing-page' style={{height:"100vh", backgroundColor:"greenyellow"}}>
         Home
       </div>
     </>

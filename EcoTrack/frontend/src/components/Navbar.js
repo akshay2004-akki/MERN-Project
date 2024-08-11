@@ -6,7 +6,7 @@ const Navbar = () => {
     <nav className="navbar fixed-top">
       <div className="logo">
         <img src={logo} alt="Environment" />
-        <span>EcoTrack</span>
+        <span>EcoTrack</span> 
       </div>
       <ul className="nav-links">
         <li><Link to="/">Home</Link></li>

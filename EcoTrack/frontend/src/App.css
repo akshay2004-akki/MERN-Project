@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Poppins:wght@400;500;700&display=swap'); */
+
 /* Navbar.css */
 
 .navbar {
@@ -5,7 +8,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: white;
+  background-color: transparent;
 }
 
 .logo {
@@ -15,14 +18,15 @@
 
 .logo img {
   height: 80px;
-  margin-right: 80px;
+  margin-right: 20px;
   border-radius: 50%;
 }
 
 .logo span {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #333;
+  color: #fff;
+  font-family: Ubuntu;
 }
 
 .nav-links {
@@ -37,14 +41,14 @@
   padding: 10px;
 }
 .nav-links li:hover{
-  background-color: #b8f859;
+  background-color: #0ac70a;
   transition-duration: 0.3s;
   border-radius: 25px;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: #333;
+  color: #fff;
   transition: color 0.3s ease;
 }
 
@@ -67,7 +71,8 @@
 /* Landing page */
 
 .landing-page{
-  /* background-image: url("./Images/landing\ page2.jpg"); */
+  background-image: url("./Images/noah-buscher-x8ZStukS2PM-unsplash.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  filter: brightness(0.6);
 }
