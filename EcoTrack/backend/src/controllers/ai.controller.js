@@ -3,8 +3,10 @@ import SurveyResponse from '../models/survey.model.js';
 import AiPrediction from '../models/ai.model.js';
 import { predictCarbonEmissionsFromSurvey } from '../services/aiServices.js';
 import { ApiResponse } from '../utils/ApiResponse.js';
+import asyncHandler from '../utils/asyncHandler.js';
+import { ApiError } from '../utils/ApiError.js';
 
-export const getCarbonFootprintPrediction = async (req, res) => {
+export const generateCarbonFootprintPrediction = async (req, res) => {
     try {
         const surveyData = req.body;
 
@@ -23,8 +25,20 @@ export const getCarbonFootprintPrediction = async (req, res) => {
             prediction
         });
 
-        res.status(200).json(new ApiResponse(200,prediction, "Prediction generated succesfully"));
+        res.status(200).json(new ApiResponse(200,{}, "Prediction generated succesfully"));
     } catch (error) {
         res.status(500).json(error?.message);
     }
 };
+
+export const getPrediction = asyncHandler(async(req,res)=>{
+    const userId = req.user?._id;
+
+    const userPrediction = await AiPrediction.findOne({userId : userId});
+
+    if(!userPrediction){
+        throw new ApiError(400,"Invalid User")
+    }
+
+    res.status(200).json(new ApiResponse(200,userPrediction.prediction, "Prediction fetched successfully"))
+})

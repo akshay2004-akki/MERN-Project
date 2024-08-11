@@ -7,7 +7,7 @@ import Webinar from './components/Webinar.js';
 import About from './components/About.js';
 import ContactUs from './components/ContactUs.js';
 import Blog from './components/Blog.js'
-import WhatWeDo from './components/WhatWeDo.js';
+import Tasks from './components/Tasks.js';
 
 function App() {
 
@@ -34,7 +34,7 @@ function App() {
           <Route path='/about' element={<About/>} />
           <Route path='/contactUs' element = {<ContactUs/>} />
           <Route path='/blog' element = {<Blog/>} />
-          <Route path='/whatWeDo' element={<WhatWeDo/>}/>
+          <Route path='/tasks' element={<Tasks/>}/>
         </Routes>
       </Router>
     </>

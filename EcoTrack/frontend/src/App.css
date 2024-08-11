@@ -7,8 +7,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  background-color: transparent;
+  padding: 5px;
 }
 
 .logo {
@@ -36,19 +35,19 @@
 }
 
 .nav-links li {
-  font-size: 1rem;
-  
+  font-size: 1.3rem;
   padding: 10px;
 }
 .nav-links li:hover{
-  background-color: #0ac70a;
+  background-color: #4e3e3e;
   transition-duration: 0.3s;
   border-radius: 25px;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: #fff;
+  color: #f7682b;
+  font-weight: 700;
   transition: color 0.3s ease;
 }
 
@@ -70,9 +69,134 @@
 
 /* Landing page */
 
-.landing-page{
+.content h1 {
+  font-size: 3rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  filter: brightness(2);
+  text-align: left;
+  padding: 10px;
+  animation: blinking 2s ease infinite;
+}
+
+.content h2{
+  /* font-size: 3rem; */
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  filter: brightness(2);
+  text-align: left;
+  padding: 10px;
+  animation: blinking2 2s ease infinite;
+}
+
+@keyframes blinking2 {
+  0%{
+    text-shadow: 0 0 0px rgb(13, 180, 241);
+  }
+  50%{
+    text-shadow: 0 0 15px rgb(10, 171, 240);
+  }
+  100%{
+    text-shadow: 0 0 0px rgb(13, 180, 241);
+  }
+}
+
+@keyframes blinking {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.content p {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  filter: brightness(2);
+  text-align: left;
+  padding: 10px;
+  text-shadow: 0 0 10px #111;
+}
+
+.cta-button {
+  padding: 15px 30px;
+  background-color: #00c853;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.cta-button:hover {
+  background-color: #00a152;
+}
+
+/* Landing page background */
+.landing-page {
   background-image: url("./Images/noah-buscher-x8ZStukS2PM-unsplash.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  filter: brightness(0.6);
+  filter: brightness(0.8);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  /* text-align: center; */
+  width: 100%;
+}
+
+/* Adjusting content positioning for a clean layout */
+.content {
+  max-width: 800px;
+  /* margin: 0 auto; */
+  
+}
+
+.content2 {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 40px;
+  background: linear-gradient(to bottom, #fff, #7cf17c,#7cf17c, #fff);
+}
+
+.about {
+  padding: 30px;
+  color: #111;
+  text-align: left;
+  font-family: 'Poppins', sans-serif;
+  width: 700px;
+}
+
+.about h2 {
+  font-size: 2.5rem;
+  font-family: 'Ubuntu', sans-serif;
+  margin-bottom: 20px;
+}
+
+.about p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.about h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.about ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.about ul li {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
 }
