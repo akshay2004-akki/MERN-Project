@@ -1,5 +1,5 @@
 import './App.css';
-import {useEffect, useState} from 'react'
+// import {useEffect, useState} from 'react'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Navbar from './components/Navbar.js';
 import Home from './components/Home.js';
@@ -11,18 +11,18 @@ import Tasks from './components/Tasks.js';
 
 function App() {
 
-  const [lat, setLat] = useState("");
-  const [lon, setLon] = useState("")
+  // const [lat, setLat] = useState("");
+  // const [lon, setLon] = useState("")
 
-  useEffect(()=>{
-    navigator.geolocation.getCurrentPosition(function(position){
-      const { latitude, longitude } = position.coords;
-      setLat(latitude)
-      setLon(longitude)
-      console.log(latitude,longitude);
+  // useEffect(()=>{
+  //   navigator.geolocation.getCurrentPosition(function(position){
+  //     const { latitude, longitude } = position.coords;
+  //     setLat(latitude)
+  //     setLon(longitude)
+  //     console.log(latitude,longitude);
       
-    })
-  },[])
+  //   })
+  // },[])
 
   return (
     <>

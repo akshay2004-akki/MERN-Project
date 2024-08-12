@@ -4,18 +4,33 @@ import { useNavigate } from "react-router-dom";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts3D from "highcharts/highcharts-3d";
-import Geocode from 'react-geocode';
+// import {setKey, setLanguage, setRegion, fromLatLng} from 'react-geocode';
 
 // Set the Google Maps Geocoding API key
-Geocode.setKey('AIzaSyDo0xJ2MTxm8T8CSWrKs5Q8AfmQ0XU8saw');
 
-// Optionally set the language and region (not necessary, but can be customized)
-Geocode.setLanguage('en');
-Geocode.setRegion('us');
 
 Highcharts3D(Highcharts);
 
 function Home() {
+
+  const [lat, setLat] = useState("");
+  const [lon, setLon] = useState("");
+  const [address, setAddress] = useState('Cities');
+
+//   useEffect(()=>{
+//     setKey(process.env.REACT_APP_GPS_API);
+
+// // Optionally set the language and region (not necessary, but can be customized)
+//   setLanguage('en');
+//   setRegion('us');
+//   navigator.geolocation.getCurrentPosition(function (position) {
+//     const { latitude, longitude } = position.coords;
+//     setLat(latitude);
+//     setLon(longitude);
+//     console.log(latitude, longitude);
+//   });
+//   },[])
+
   const route = useNavigate();
   const handleRoute = () => {
     route("/about");
@@ -23,34 +38,23 @@ function Home() {
 
   const contentRef = useRef([]);
 
-  const [lat, setLat] = useState("");
-  const [lon, setLon] = useState("");
-  const [address, setAddress] = useState('');
+  // useEffect(() => {
+  //   // Example coordinates
+  //   // const lat = 40.73061;
+  //   // const lng = -73.935242;
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      const { latitude, longitude } = position.coords;
-      setLat(latitude);
-      setLon(longitude);
-      console.log(latitude, longitude);
-    });
-  }, []);
-
-  useEffect(() => {
-    // Example coordinates
-    // const lat = 40.73061;
-    // const lng = -73.935242;
-
-    Geocode.fromLatLng(lat, lon).then(
-      (response) => {
-        const address = response.results[0].formatted_address;
-        setAddress(address);
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }, [lat, lon]);
+  //   fromLatLng(lat, lon).then(
+  //     (response) => {
+  //       const address = response.results[0].formatted_address;
+  //       console.log(address);
+        
+  //       setAddress(address);
+  //     },
+  //     (error) => {
+  //       console.error(error);
+  //     }
+  //   );
+  // }, [lat, lon]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

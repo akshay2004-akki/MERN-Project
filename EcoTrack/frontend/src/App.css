@@ -273,7 +273,7 @@
 }
 .fade-in-left{
   opacity: 0;
-  transform: translateX(100px);
+  transform: translateX(-100px);
   transition: opacity 3s ease-out, transform 4s ease-out;
 }
 
