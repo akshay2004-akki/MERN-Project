@@ -32,7 +32,10 @@ const Navbar = () => {
         <li><Link to="/contactUs">Contact Us</Link></li>
         <li><Link to="/webinar">Webinar</Link></li>
       </ul>
-      <button className="donate-button">Make A Donation</button>
+      <div className="d-flex" style={{gap:"30px"}}>
+      <button className="btn btn-success">Log in</button>
+      <button className="btn btn-danger">Sign Up</button>
+      </div>
     </nav>
   );
 };

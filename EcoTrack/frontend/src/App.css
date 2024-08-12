@@ -31,6 +31,8 @@
 .nav-links {
   list-style: none;
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 1.5rem;
 }
 
@@ -46,7 +48,7 @@
 
 .nav-links a {
   text-decoration: none;
-  color: #f7682b;
+  color: #fff;
   font-weight: 700;
   transition: color 0.3s ease;
 }
@@ -143,17 +145,41 @@
   background-image: url("./Images/noah-buscher-x8ZStukS2PM-unsplash.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  filter: brightness(0.8);
+  filter: brightness(1);
   display: flex;
   justify-content: flex-start;
   align-items: center;
   /* text-align: center; */
   width: 100%;
+  animation: bgChange 20s ease-in-out infinite;
 }
+
+@keyframes bgChange {
+  0%{
+    background-image: url(./Images/noah-buscher-x8ZStukS2PM-unsplash.jpg);
+  }
+  25%{
+    background-image: url(./Images/pexels-laura-paredis-1047081-20582185.jpg);
+  }
+  50%{
+    background-image: url(./Images//pexels-pixabay-60013.jpg);
+  }
+  75%{
+    background-image: url(./Images/pexels-pixabay-221012.jpg);
+  }
+  100%{
+    background-image: url(./Images/noah-buscher-x8ZStukS2PM-unsplash.jpg);
+  }
+}
+
+
 
 /* Adjusting content positioning for a clean layout */
 .content {
   max-width: 800px;
+  color: skyblue;
+  background-color: #11111130;
+  border-radius: 20px;
   /* margin: 0 auto; */
   
 }
@@ -164,7 +190,7 @@
   justify-content: space-around;
   align-items: center;
   padding-top: 40px;
-  background: linear-gradient(to bottom, #fff, #7cf17c,#7cf17c, #fff);
+  /* background-image: url(./Images/AdobeStock_719233123_Preview.jpg); */
 }
 
 .about {
@@ -173,6 +199,7 @@
   text-align: left;
   font-family: 'Poppins', sans-serif;
   width: 700px;
+  font-weight: 500;
 }
 
 .about h2 {
@@ -200,3 +227,77 @@
   font-size: 1.1rem;
   margin-bottom: 10px;
 }
+
+.content3 {
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 15px;
+  padding-top: 40px;
+  /* max-width: 800px; */
+  /* margin: 20px auto; */
+}
+
+.working {
+  /* text-align: left; */
+  font-family: 'Poppins', sans-serif;
+  width: 700px;
+}
+
+.working h2 {
+  font-size: 2rem;
+  color: #333;
+  font-family: 'Ubuntu', sans-serif;
+  margin-bottom: 20px;
+}
+
+.step {
+  margin-bottom: 20px;
+}
+
+.step h3 {
+  font-size: 1.5rem;
+  color: green;
+}
+
+.step p {
+  font-size: 1rem;
+  color: #666;
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(200px);
+  transition: opacity 3s ease-out, transform 2s ease-out;
+}
+.fade-in-left{
+  opacity: 0;
+  transform: translateX(100px);
+  transition: opacity 3s ease-out, transform 4s ease-out;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-in-left.show{
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-out {
+  opacity: 1;
+  transition: opacity 3s ease-out;
+}
+
+.fade-out.hide {
+  opacity: 0;
+  transition : opacity 3s ease-out;
+}
+
+.fade-in-left.hide{
+  opacity: 0;
+  transition : opacity 3s ease-out;
+}
+
