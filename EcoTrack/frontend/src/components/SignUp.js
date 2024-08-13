@@ -38,10 +38,11 @@ function SignUp() {
   };
 
   return (
-    <div className="signup-container">
+    <div style={{display:"flex", justifyContent:"center", alignItems:"center", transform:"translateY(90px)"}}>
+        <div className="signup-container">
       <h1>Sign Up</h1>
       <form onSubmit={handleSignUp}>
-        <div className="input-group">
+        <div className="input-group2">
           <label htmlFor="fullName">Full Name</label>
           <input
             type="text"
@@ -52,7 +53,7 @@ function SignUp() {
             onChange={(e) => setFullName(e.target.value)}
           />
         </div>
-        <div className="input-group">
+        <div className="input-group2">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -63,7 +64,7 @@ function SignUp() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="input-group">
+        <div className="input-group2">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -75,7 +76,7 @@ function SignUp() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="input-group">
+        <div className="input-group2">
           <label htmlFor="role">Role</label>
           <select
             id="role"
@@ -88,7 +89,7 @@ function SignUp() {
             <option value="Organisation">Organisation</option>
           </select>
         </div>
-        <div className="input-group">
+        <div className="input-group2">
           <label htmlFor="avatar">Avatar</label>
           <input
             type="file"
@@ -100,6 +101,7 @@ function SignUp() {
         </div>
         <button type="submit">Sign Up</button>
       </form>
+    </div>
     </div>
   );
 }

@@ -9,6 +9,7 @@ import Blog from './components/Blog.js'
 import Tasks from './components/Tasks.js';
 import Login from './components/Login.js';
 import { useState, useEffect } from 'react';
+import SignUp from './components/SignUp.js';
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
           <Route path='/blog' element={<Blog/>} />
           <Route path='/tasks' element={<Tasks/>} />
           <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} setAvatar={setAvatar} />} />
+          <Route path='/signup' element={<SignUp/>} />
         </Routes>
       </Router>
     </>

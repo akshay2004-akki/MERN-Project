@@ -23,6 +23,9 @@ const Navbar = ({loggesIn, avatar}) => {
       const handleNav = ()=>{
         route("/login")
       }
+      const handleSignUp = ()=>{
+        route("/signup")
+      }
   return (
     <nav className="navbar fixed-top" style={{backgroundColor: `${bgColor}`}}>
       <div className="logo">
@@ -39,7 +42,7 @@ const Navbar = ({loggesIn, avatar}) => {
       </ul>
       <div className={`d-flex`} style={{gap:"30px"}}>
       <button className={`btn btn-success d-${loggesIn ? "none" : "block"}`} onClick={handleNav}>Log in</button>
-      <button className={`btn btn-danger d-${loggesIn ? "none" : "block"}`}>Sign Up</button>
+      <button className={`btn btn-danger d-${loggesIn ? "none" : "block"}`} onClick={handleSignUp}>Sign Up</button>
       </div>
       <button className={`profile btn d-${loggesIn ? "block":"none"}`} style={{height:"50px", width:"50px", borderRadius:"50%", backgroundImage:`url(${avatar})`, backgroundSize:"cover"}}></button>
     </nav>
