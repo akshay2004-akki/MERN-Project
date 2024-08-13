@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts3D from "highcharts/highcharts-3d";
+import axios from 'axios'
 // import {setKey, setLanguage, setRegion, fromLatLng} from 'react-geocode';
 
 // Set the Google Maps Geocoding API key
@@ -13,24 +14,6 @@ Highcharts3D(Highcharts);
 
 function Home() {
 
-  const [lat, setLat] = useState("");
-  const [lon, setLon] = useState("");
-  const [address, setAddress] = useState('Cities');
-
-//   useEffect(()=>{
-//     setKey(process.env.REACT_APP_GPS_API);
-
-// // Optionally set the language and region (not necessary, but can be customized)
-//   setLanguage('en');
-//   setRegion('us');
-//   navigator.geolocation.getCurrentPosition(function (position) {
-//     const { latitude, longitude } = position.coords;
-//     setLat(latitude);
-//     setLon(longitude);
-//     console.log(latitude, longitude);
-//   });
-//   },[])
-
   const route = useNavigate();
   const handleRoute = () => {
     route("/about");
@@ -38,23 +21,45 @@ function Home() {
 
   const contentRef = useRef([]);
 
-  // useEffect(() => {
-  //   // Example coordinates
-  //   // const lat = 40.73061;
-  //   // const lng = -73.935242;
+  const [res, setRes] = useState("");
 
-  //   fromLatLng(lat, lon).then(
-  //     (response) => {
-  //       const address = response.results[0].formatted_address;
-  //       console.log(address);
-        
-  //       setAddress(address);
-  //     },
-  //     (error) => {
-  //       console.error(error);
-  //     }
-  //   );
-  // }, [lat, lon]);
+  const [lat, setLat] = useState("");
+  const [lon, setLon] = useState("");
+  // const [address, setAddress] = useState("");
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      const { latitude, longitude } = position.coords;
+      setLat(latitude);
+      setLon(longitude);
+      console.log(latitude, longitude);
+    });
+    const generate = async () => {
+      const options = {
+        method: "GET",
+        url: "https://map-geocoding.p.rapidapi.com/json",
+        params: {
+          latlng: `${lat}, ${lon}`,
+        },
+        headers: {
+          "x-rapidapi-key":
+            "cac67db0f1mshd481c4a651bea42p11b092jsn7781490d5532",
+          "x-rapidapi-host": "map-geocoding.p.rapidapi.com",
+        },
+      };
+
+      try {
+        const response = await axios.request(options);
+        console.log(response.data.results[5].formatted_address);
+        setRes(response.data?.results[5].formatted_address)
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    generate();
+  }, [lat, lon]);
+
+  
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -100,7 +105,7 @@ function Home() {
     },
 
     title: {
-      text: "Global Carbon Emissions",
+      text: "Your City's Carbon Emissions",
     },
     plotOptions: {
       pie: {
@@ -112,10 +117,11 @@ function Home() {
       {
         name: "Emissions",
         data: [
-          [`${address}`, 70],
-          ["Others", 30],
+          [`${res}`, 30],
+          ["Chandigarh", 15],
+          ["Delhi", 55]
         ],
-        colors: ["#FF8042", "#0088FE"], // Customize the colors
+        colors: ["#FF8042", "#0088FE", "#f30c0c"], // Customize the colors
       },
     ],
   };

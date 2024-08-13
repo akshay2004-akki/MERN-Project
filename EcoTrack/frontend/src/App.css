@@ -301,3 +301,156 @@
   transition : opacity 3s ease-out;
 }
 
+/* Login form */
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url(./Images/v2osk-1Z2niiBPg5A-unsplash.jpg);
+  background-size: cover;
+  position: relative;
+  filter: url(#fog); /* Apply the fog filter */
+  overflow: hidden;
+}
+
+.fog-svg {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+.sun {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  background-color: #fff;
+  top: 310px;
+  left: 76%;
+  border-radius: 50%;
+  animation: shine 4s ease-in-out infinite, rotate 10s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    box-shadow: 0px 0px 10px #fff, 0px 0px 20px #ffd700, 0px 0px 30px #ffd700;
+  }
+  50% {
+    box-shadow: 0px 0px 50px #fff, 0px 0px 300px #ffd700, 0px 0px 350px #ffd700;
+  }
+  100% {
+    box-shadow: 0px 0px 10px #fff, 0px 0px 20px #ffd700, 0px 0px 30px #ffd700;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.login-form {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 350px;
+  position: relative;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login-header h1 {
+  color: #00b894;
+  font-size: 24px;
+  margin: 0;
+}
+
+.login-header .logo {
+  margin-top: -45px;
+  position: absolute;
+  top: 0;
+  left: 38%;
+
+}
+
+.login-header .logo img {
+  height: 80px;
+}
+.login-header h1{
+  padding:20px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  color: #00b894;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.show-password input {
+  margin-right: 5px;
+}
+
+.forgot-password {
+  color: #00b894;
+  text-decoration: none;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.remember-me input {
+  margin-right: 5px;
+}
+
+.login-button {
+  width: 100%;
+  background-color: #00b894;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.login-button:hover {
+  background-color: #019874;
+}

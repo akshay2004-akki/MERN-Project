@@ -1,5 +1,4 @@
 import './App.css';
-// import {useEffect, useState} from 'react'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Navbar from './components/Navbar.js';
 import Home from './components/Home.js';
@@ -8,33 +7,37 @@ import About from './components/About.js';
 import ContactUs from './components/ContactUs.js';
 import Blog from './components/Blog.js'
 import Tasks from './components/Tasks.js';
+import Login from './components/Login.js';
+import { useState, useEffect } from 'react';
 
 function App() {
 
-  // const [lat, setLat] = useState("");
-  // const [lon, setLon] = useState("")
+  const [loggesIn, setIsLoggedIn] = useState(false);
+  const [avatar, setAvatar] = useState(null);
 
-  // useEffect(()=>{
-  //   navigator.geolocation.getCurrentPosition(function(position){
-  //     const { latitude, longitude } = position.coords;
-  //     setLat(latitude)
-  //     setLon(longitude)
-  //     console.log(latitude,longitude);
-      
-  //   })
-  // },[])
+  useEffect(() => {
+    // Check if the user is already logged in
+    const loggedIn = localStorage.getItem('isLoggedIn');
+    const storedAvatar = localStorage.getItem('avatar');
+
+    if (loggedIn) {
+      setIsLoggedIn(true);
+      setAvatar(storedAvatar);
+    }
+  }, []);
 
   return (
     <>
       <Router>
-        <Navbar/>
+        <Navbar loggesIn={loggesIn} avatar={avatar} />
         <Routes>
-          <Route path='/' element = {<Home/>} />
-          <Route path='/webinar' element = {<Webinar/>} />
+          <Route path='/' element={<Home/>} />
+          <Route path='/webinar' element={<Webinar/>} />
           <Route path='/about' element={<About/>} />
-          <Route path='/contactUs' element = {<ContactUs/>} />
-          <Route path='/blog' element = {<Blog/>} />
-          <Route path='/tasks' element={<Tasks/>}/>
+          <Route path='/contactUs' element={<ContactUs/>} />
+          <Route path='/blog' element={<Blog/>} />
+          <Route path='/tasks' element={<Tasks/>} />
+          <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} setAvatar={setAvatar} />} />
         </Routes>
       </Router>
     </>

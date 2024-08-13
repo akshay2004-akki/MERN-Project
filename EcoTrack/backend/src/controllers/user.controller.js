@@ -82,8 +82,8 @@ export const loginUser = asyncHandler(async(req,res)=>{
     const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
 
     const options = {
-        httpOnly : true,
-        secure : false
+        httpOnly : false,
+        secure : true
     }
 
     return res
@@ -106,8 +106,8 @@ export const logOutUser = asyncHandler(async(req,res)=>{
         }
     )
     const options = {
-        httpOnly : true,
-        secure : false
+        httpOnly : false,
+        secure : true
     }
 
     return res

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import logo from '../Images/logo.jpg'
-import { Link } from "react-router-dom";
-const Navbar = () => {
+import { Link, useNavigate } from "react-router-dom";
+const Navbar = ({loggesIn, avatar}) => {
     const [bgColor, setBgColor] = useState("transparent")
+    // const [display, setDisplay] = useState("block")
+    const route = useNavigate()
     useEffect(() => {
         const handleScroll = () => {
           if (window.scrollY > 0) {
@@ -18,6 +20,9 @@ const Navbar = () => {
           window.removeEventListener('scroll', handleScroll);
         };
       }, []);
+      const handleNav = ()=>{
+        route("/login")
+      }
   return (
     <nav className="navbar fixed-top" style={{backgroundColor: `${bgColor}`}}>
       <div className="logo">
@@ -32,10 +37,11 @@ const Navbar = () => {
         <li><Link to="/contactUs">Contact Us</Link></li>
         <li><Link to="/webinar">Webinar</Link></li>
       </ul>
-      <div className="d-flex" style={{gap:"30px"}}>
-      <button className="btn btn-success">Log in</button>
-      <button className="btn btn-danger">Sign Up</button>
+      <div className={`d-flex`} style={{gap:"30px"}}>
+      <button className={`btn btn-success d-${loggesIn ? "none" : "block"}`} onClick={handleNav}>Log in</button>
+      <button className={`btn btn-danger d-${loggesIn ? "none" : "block"}`}>Sign Up</button>
       </div>
+      <button className={`profile btn d-${loggesIn ? "block":"none"}`} style={{height:"50px", width:"50px", borderRadius:"50%", backgroundImage:`url(${avatar})`, backgroundSize:"cover"}}></button>
     </nav>
   );
 };
