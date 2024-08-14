@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { error } from 'highcharts'
+// import { error } from 'highcharts'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 

@@ -46,6 +46,7 @@ export const regiterWbinar = asyncHandler(async(req,res)=>{
 
     const existingRegistration = await Webinar.findOne({ email, date: parsedDate });
     if (existingRegistration) {
+        res.status(409).send("You have already registered for this date")
         throw new ApiError(400, "You have already registered for this date");
     }
     const newWebinar = await Webinar.create({

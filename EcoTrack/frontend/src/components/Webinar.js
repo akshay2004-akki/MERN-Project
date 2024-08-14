@@ -34,14 +34,16 @@ function Webinar() {
                 date: ''
             });
         } catch (error) {
-            setMessage('Error: ' + error.response?.data?.message || error.message);
+          console.log(error);
+          
+            setMessage('Error: ' + error.response.data || error.message);
         }
     };
 
     return (
-        <div style={{maxWidth: '400px', margin: '0 auto'}}>
+        <div style={{maxWidth: '400px', margin: '0 auto', transform:"translateY(90px)"}}>
             <h2>Register for Webinar</h2>
-            <form onSubmit={handleSubmit}>
+            <form className='form4' onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="name">Name:</label>
                     <input 
