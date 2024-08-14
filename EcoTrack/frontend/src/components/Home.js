@@ -5,6 +5,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts3D from "highcharts/highcharts-3d";
 import axios from 'axios'
+import image from '../Images/stock-vector-circular-economy-illustration-set-sustainable-economic-growth-strategy-recourses-reuse-and-reduce-2193150685.jpg'
 // import {setKey, setLanguage, setRegion, fromLatLng} from 'react-geocode';
 
 // Set the Google Maps Geocoding API key
@@ -235,15 +236,11 @@ function Home() {
           className="video fade-in-left"
           ref={(el) => (contentRef.current[3] = el)}
         >
-          <video
-            src={video}
-            autoPlay
-            controls
-            loop
-            playsInline
-            muted
+          <img
+            src={image}
+            alt="a"
             style={{
-              height: "400px",
+              height: "350px",
               width: "700px",
               borderRadius: "15px",
               border: "none",

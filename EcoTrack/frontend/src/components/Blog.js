@@ -21,12 +21,14 @@ const Blog = () => {
   }, []);
 
   return (
-    <div className="blog-container">
+    <div className="blog-container" style={{transform:"translateY(90px)"}}>
       {blogs && blogs.map((blog) => (
-        <div key={blog._id} className="blog-card">
+        <div key={blog._id} className="blog-card" style={{fontFamily:"Poppins"}}>
+          <div className="image3" style={{display:"flex", justifyContent:"center"}}>
           {blog.coverImage && (
-            <img src={blog.coverImage} alt={blog.title} className="blog-image" style={{width:"fit-content"}}/>
+            <img src={blog.coverImage} alt={blog.title} className="blog-image"/>
           )}
+          </div>
           <div className="blog-content">
             <h2 className="blog-title">{blog.title}</h2>
             <p className="blog-author">By: {blog.author.fullName}</p>
