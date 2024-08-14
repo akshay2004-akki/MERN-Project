@@ -10,7 +10,7 @@ function SignUp() {
   const [avatar, setAvatar] = useState(null);
   const route = useNavigate();
 
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
 
     // Create form data
@@ -21,7 +21,7 @@ function SignUp() {
     formData.append('role', role);
     formData.append('avatar', avatar);
 
-    axios.post('http://localhost:8000/api/v4/users/register', formData, {
+    await axios.post('http://localhost:8000/api/v4/users/register', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

@@ -10,6 +10,8 @@ import Tasks from './components/Tasks.js';
 import Login from './components/Login.js';
 import { useState, useEffect } from 'react';
 import SignUp from './components/SignUp.js';
+import Survey from './components/Survey.js';
+import LogOut from './components/LogOut.js';
 
 function App() {
 
@@ -40,7 +42,9 @@ function App() {
           <Route path='/tasks' element={<Tasks/>} />
           <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} setAvatar={setAvatar} />} />
           <Route path='/signup' element={<SignUp/>} />
+          <Route path='/survey' element={<Survey/>} />
         </Routes>
+        {/* <LogOut/> */}
       </Router>
     </>
   );

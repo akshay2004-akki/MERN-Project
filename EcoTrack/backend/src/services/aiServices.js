@@ -44,7 +44,7 @@ export const predictCarbonEmissionsFromSurvey = async (surveyData) => {
 
         const result = await model.generateContent(prompt);
         const response = await result.response;
-        const processedResponse = response.text().replace(/\*\*(.*?)\*\*/g, '<strong class="highlight">$1</strong>');
+        const processedResponse = response.text().replace(/\*\*(.*?)\*\*/g, '<strong class="highlight">$1</strong>').replace(/\n/g, '<br/>');;
         console.log(processedResponse);
 
         return processedResponse;

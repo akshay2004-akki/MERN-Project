@@ -551,3 +551,83 @@
 .signup-container a:hover {
   text-decoration: underline;
 }
+
+.form-container3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #2c5364, #0f2027);
+  font-family: 'Poppins', sans-serif;
+}
+
+.form3 {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 100%;
+}
+
+.form-step {
+  margin-bottom: 20px;
+  transition-duration:0.4s ;
+}
+
+label {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+  display: block;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #6c63ff;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(108, 99, 255, 0.3);
+}
+
+.form-navigation {
+  display: flex;
+  justify-content: space-between;
+}
+
+.prev-button,
+.next-button,
+.submit-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #6c63ff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.prev-button:hover,
+.next-button:hover,
+.submit-button:hover {
+  background-color: #554cd2;
+}
+
+.prev-button {
+  background-color: #999;
+}
+
+.prev-button:hover {
+  background-color: #777;
+}
