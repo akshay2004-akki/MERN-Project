@@ -20,7 +20,7 @@ const Login = ({ setIsLoggedIn, setAvatar }) => {
     axios.post("http://localhost:8000/api/v4/users/login", loginData, { withCredentials: true })
       .then((response) => {
         // Handle success
-        console.log(response.data);
+        // console.log(response.data);
         alert(response.data.message);
 
         // Update state
@@ -30,8 +30,13 @@ const Login = ({ setIsLoggedIn, setAvatar }) => {
         // Store login status and avatar in localStorage
         localStorage.setItem('isLoggedIn', true);
         localStorage.setItem('avatar', response.data.data.avatar);
+        if (!localStorage.getItem('surveyCompleted')) {
+          route('/survey');
+        } else {
+          route('/');
+        }
 
-        route("/");
+
       })
       .catch((error) => {
         // Handle error

@@ -42,7 +42,7 @@ function App() {
           <Route path='/tasks' element={<Tasks/>} />
           <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} setAvatar={setAvatar} />} />
           <Route path='/signup' element={<SignUp/>} />
-          <Route path='/survey' element={<Survey/>} />
+          <Route path='/survey' element={localStorage.getItem('surveyCompleted') ? <Home /> : <Survey />} />
         </Routes>
         {/* <LogOut/> */}
       </Router>

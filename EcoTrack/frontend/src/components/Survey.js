@@ -1,11 +1,11 @@
 import axios from 'axios';
 // import { error } from 'highcharts';
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 
 const Survey = () => {
   const [step, setStep] = useState(0);
-  const [res, setRes] = useState("")
+  const [res, setRes] = useState("");
   const [formData, setFormData] = useState({
     energyUsageDescription: '',
     energySourceDescription: '',
@@ -34,14 +34,18 @@ const Survey = () => {
     }
   };
 
+  const route = useNavigate()
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios.post("http://localhost:8000/api/v4/ai/predict-carbon-footprint", formData, {withCredentials:true})
       .then((response)=>{
         setRes(response.data.data.message)
+        localStorage.setItem('surveyCompleted', true); // Mark the survey as completed
+        route('/'); // Redirect to home or another page
       })
       .catch((error)=>{
-        console.log(error.message);
+        setRes(error.response.data);
         
       })
     console.log(formData);
@@ -59,6 +63,18 @@ const Survey = () => {
     'Cooling Usage Description',
   ];
 
+  const placeholders = [
+    'Describe your typical energy usage at home (like electricity, solar, grid ?).',
+    'What is your primary source of energy (solar, grid, etc.)?',
+    'Describe the type of vehicle you use.',
+    'What are your usual transportation habits?',
+    'How often do you take flights?',
+    'Describe your diet (e.g., vegetarian, omnivore).',
+    'How do you manage your waste (e.g., recycling, composting)?',
+    'How do you use heating in your home?',
+    'How do you use cooling in your home?',
+  ];
+
   const fields = [
     'energyUsageDescription',
     'energySourceDescription',
@@ -71,7 +87,6 @@ const Survey = () => {
     'coolingUsageDescription',
   ];
 
-
   return (
     <div className="form-container3">
       <form className='form3' onSubmit={handleSubmit}>
@@ -80,6 +95,7 @@ const Survey = () => {
           <textarea
             id={fields[step]}
             name={fields[step]}
+            placeholder={placeholders[step]}  // Added placeholder here
             value={formData[fields[step]]}
             onChange={handleChange}
             required
