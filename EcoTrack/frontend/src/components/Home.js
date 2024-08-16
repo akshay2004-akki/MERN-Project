@@ -126,6 +126,105 @@ function Home() {
       },
     ],
   };
+  const pieOptions = {
+    chart: {
+      type: 'pie',
+      options3d: {
+        enabled: true,
+        alpha: 45,
+        beta: 0,
+      },
+      backgroundColor: 'lightgreen',
+    },
+    title: {
+      text: "3D Pie Chart: India's CO2 Emissions",
+    },
+    plotOptions: {
+      pie: {
+        innerSize: 100,
+        depth: 45,
+        dataLabels: {
+          enabled: true,
+          format: '{point.name}: {point.y:.1f}%', // Show name and percentage on hover
+          style: {
+            color: '#000000',
+          },
+        },
+        states: {
+          hover: {
+            enabled: true,
+            brightness: 0.2, // Adjust brightness on hover
+            halo: {
+              size: 10,
+              opacity: 0.25,
+            },
+          },
+        },
+      },
+    },
+    series: [
+      {
+        name: "India's CO2 Emissions",
+        data: [
+          { name: '2022 Increase', y: 6.52, color: 'yellow' },  // Increase with green color
+          { name: '2021 Increase', y: 8.94, color: 'green' },  // Increase with green color
+          { name: '2020 Decrease', y: 8.68, color: 'red' },    // Decrease with red color
+          { name: '2019 Decrease', y: 1.25, color: 'lightblue' },    // Decrease with red color
+          { name: '2018 Increase', y: 5.73, color: 'blue' },  // Increase with green color
+          { name: '2017 Increase', y: 5.66, color: 'violet' },  // Increase with green color
+        ],
+      },
+    ],
+  };
+  
+
+  // 3D Bar Chart Configuration
+  const barOptions = {
+    chart: {
+      type: 'column',
+      options3d: {
+        enabled: true,
+        alpha: 15,
+        beta: 15,
+        depth: 50,
+        viewDistance: 25,
+      },
+      backgroundColor: 'lightpink',
+      boxShadow : "lightpink"
+    },
+    title: {
+      text: '3D Bar Chart: CO2 Emissions and Population',
+    },
+    xAxis: {
+      categories: ['2022', '2021', '2020', '2019', '2018', '2017'],
+      labels: {
+        skew3d: true,
+        style: {
+          fontSize: '16px',
+        },
+      },
+    },
+    yAxis: {
+      title: {
+        text: null,
+      },
+    },
+    plotOptions: {
+      column: {
+        depth: 25,
+      },
+    },
+    series: [
+      {
+        name: 'Fossil CO2 Emissions (tons)',
+        data: [2693034100, 2528133480, 2320678660, 2541365980, 2573606310, 2434123800],
+      },
+      {
+        name: 'Population (billions)',
+        data: [1.425, 1.414, 1.403, 1.389, 1.375, 1.36],
+      },
+    ],
+  };
 
   return (
     <>
@@ -150,6 +249,23 @@ function Home() {
             offset your carbon emissions with EcoTrack.
           </p>
           <button className="cta-button">Get Started</button>
+        </div>
+      </div>
+      <div
+        style={{
+          height: '87vh',
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingTop: '40px',
+        }}
+      >
+        <div style={{ width: '50%', padding: '20px' }}>
+          <HighchartsReact highcharts={Highcharts} options={pieOptions} />
+        </div>
+        <div style={{ width: '50%', padding: '20px' }}>
+          <HighchartsReact highcharts={Highcharts} options={barOptions} />
         </div>
       </div>
       <div

@@ -11,6 +11,7 @@ function LogOut() {
             .then((res)=>{
                 localStorage.removeItem('isLoggedIn');
                 localStorage.removeItem('avatar');
+                localStorage.removeItem("surveyCompleted")
                 alert(res.data.message);
                 route("/login")
                 window.location.reload();
@@ -22,7 +23,7 @@ function LogOut() {
     }
 
   return (
-    <button onClick={handleLogOut}>LogOut</button>
+    <button className='btn btn-danger' onClick={handleLogOut}>LogOut</button>
   )
 }
 

@@ -1,6 +1,5 @@
 import axios from 'axios';
-// import { error } from 'highcharts';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Survey = () => {
@@ -17,6 +16,21 @@ const Survey = () => {
     heatingUsageDescription: '',
     coolingUsageDescription: '',
   });
+  const [predictionExists, setPredictionExists] = useState(false);
+  const route = useNavigate();
+
+  useEffect(() => {
+    // Check if a prediction exists for the user
+    axios.get("http://localhost:8000/api/v4/ai/getPrediction", {withCredentials:true})
+      .then((response) => {
+        if (response.data.data) {
+          setPredictionExists(true); // If prediction exists, set state
+        }
+      })
+      .catch((error) => {
+        console.error("Error checking prediction:", error);
+      });
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -34,20 +48,19 @@ const Survey = () => {
     }
   };
 
-  const route = useNavigate()
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios.post("http://localhost:8000/api/v4/ai/predict-carbon-footprint", formData, {withCredentials:true})
       .then((response)=>{
-        setRes(response.data.data.message)
+        setRes(response.data.data.message);
+        console.log(response);
+        
         localStorage.setItem('surveyCompleted', true); // Mark the survey as completed
         route('/'); // Redirect to home or another page
       })
       .catch((error)=>{
         setRes(error.response.data);
-        
-      })
+      });
     console.log(formData);
   };
 
@@ -86,6 +99,11 @@ const Survey = () => {
     'heatingUsageDescription',
     'coolingUsageDescription',
   ];
+
+  if (predictionExists) {
+    // return <p>Prediction already exists for this user. You cannot submit the survey again.</p>;
+    route("/")
+  }
 
   return (
     <div className="form-container3">

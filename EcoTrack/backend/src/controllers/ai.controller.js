@@ -18,6 +18,11 @@ export const generateCarbonFootprintPrediction = async (req, res) => {
         const prediction = await predictCarbonEmissionsFromSurvey(surveyData);
         console.log(prediction);
         
+        const existPrediction = await AiPrediction.findOne({userId : req.user.id})
+        if(existPrediction){
+            res.status(409).send(true)
+            throw new ApiError(409, "prediction exist")
+        }
 
         await AiPrediction.create({
             userId: req.user.id,

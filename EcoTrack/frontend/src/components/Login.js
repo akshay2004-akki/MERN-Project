@@ -48,24 +48,6 @@ const Login = ({ setIsLoggedIn, setAvatar }) => {
   return (
     <div className="login-container">
       <div className="sun"></div>
-      <svg className="fog-svg">
-        <filter id="fog">
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.01"
-            numOctaves="10"
-            result="noise"
-          />
-          <feGaussianBlur in="noise" stdDeviation="3" result="blurred" />
-          <feComponentTransfer>
-            <feFuncA type="linear" slope="0.4" />
-          </feComponentTransfer>
-          <feMerge>
-            <feMergeNode in="blurred" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </svg>
       <div className="login-form">
         <div className="login-header">
           <h1 style={{fontFamily:"Poppins"}}>Green Login Form</h1>

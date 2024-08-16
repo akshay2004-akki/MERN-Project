@@ -13,7 +13,7 @@ function About() {
           "http://localhost:8000/api/v4/ai/getPrediction",
           { withCredentials: true }
         );
-        console.log(res.data.data);
+        console.log(res.data);
         const formattedData = res.data.data
           .replace(/\*\*(.*?)\*\*/g, '<strong class="highlight">$1</strong>')
           .replace(/\n/g, "<br/>");
