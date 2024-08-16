@@ -8,7 +8,7 @@ const router = Router();
 router.use(verifyJWT); // Apply verifyJWT middleware to all routes in this file
 
 
-router.post("/toggle/t/:blogId",toggleBlogLike);
-router.route("/:blogId").get(getLikes);
+router.post("/toggle/t/:blogId", verifyJWT,toggleBlogLike);
+router.route("/:blogId").get(verifyJWT,getLikes);
 
 export default router

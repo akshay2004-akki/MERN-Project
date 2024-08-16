@@ -5,12 +5,12 @@ import { createPost, deletePost, getAllPosts, getUserPosts, updatePost } from ".
 
 const router = Router();
 
-router.post("/create-blog", upload.fields([
+router.post("/create-blog" ,upload.fields([
     {
         name : "coverImage",
-        maxCount : 2
+        maxCount : 1
     }
-]), verifyJWT ,createPost)
+]), verifyJWT ,createPost) 
 router.patch("/:blogId", verifyJWT, updatePost)
 router.get("/getPosts", verifyJWT, getUserPosts)
 router.delete("/:blogId", deletePost)

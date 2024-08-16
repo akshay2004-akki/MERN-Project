@@ -12,7 +12,7 @@ import { useState, useEffect } from 'react';
 import SignUp from './components/SignUp.js';
 import Survey from './components/Survey.js';
 import Profile from './components/Profile.js'
-import LogOut from './components/LogOut.js';
+import CreateBlog from './components/CreateBlog.js';
 
 function App() {
 
@@ -45,6 +45,7 @@ function App() {
           <Route path='/signup' element={<SignUp/>} />
           <Route path='/survey' element={localStorage.getItem('surveyCompleted') ? <Home /> : <Survey />} />
           <Route path='/profile' element = {<Profile/>}/>
+          <Route path='/createBlog' element={<CreateBlog/>} />
         </Routes>
       </Router>
     </>

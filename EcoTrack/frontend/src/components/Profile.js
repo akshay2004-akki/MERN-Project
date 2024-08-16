@@ -256,13 +256,6 @@ function Profile() {
           overflow: "scroll",
         }}
       >
-        {/* <div
-          style={{
-            fontFamily: "Ubuntu",
-            fontSize: "21px",
-          }}
-          dangerouslySetInnerHTML={{ __html: data }}
-        /> */}
         <div
           style={{
             display: "flex",
