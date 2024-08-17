@@ -170,7 +170,7 @@ const Blog = () => {
       const shadowBlur = 20;
       const shadowColor = `rgba(0, 0, 0, 0.2)`;
       image.style.transitionDuration = "0.2s"
-      image.style.transform = `translate(${imageX}px, ${imageY}px)`;
+      image.style.transform = `translate(${imageX}px, ${imageY}px) scale(1.07)`;
       image.style.boxShadow = `${shadowX}px ${shadowY}px ${shadowBlur}px ${shadowColor}`;
     }
   };
@@ -182,7 +182,7 @@ const Blog = () => {
     container.style.boxShadow = "0px 4px 10px rgba(0, 0, 0, 0.1)";
 
     if (image) {
-      image.style.transform = "translate(0px, 0px)";
+      image.style.transform = "translate(0px, 0px) scale(1)";
       image.style.boxShadow = "0px 4px 10px rgba(0, 0, 0, 0.1)"
     }
   };
@@ -222,14 +222,14 @@ const Blog = () => {
         >
           <div className="featured-blog" ref={blogsGridRef}
           onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave} style={{ padding: "20px", border:"1px solid red" }}>
+          onMouseLeave={handleMouseLeave} style={{ padding: "20px", border:"1px solid black" }}>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <img
                 src={blogs[0].coverImage}
                 alt={blogs[0].title}
                 className="featured-image"
                 ref={imageRef} // Attach the ref to the image
-                style={{borderRadius:"20px", transition: "transform 0.3s ease" }}
+                style={{borderRadius:"20px", transition: "transform 0.3s ease", border:"1px solid red" }}
               />
             </div>
             <h2 className="blog-title">{blogs[0].title}</h2>

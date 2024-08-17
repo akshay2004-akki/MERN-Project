@@ -37,11 +37,11 @@ const Navbar = ({loggesIn, avatar}) => {
       </div>
       <ul className="nav-links">
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/tasks">Tasks</Link></li>
-        <li><Link to="/blog">Blog</Link></li>
+        <li ><Link to="/about">About</Link></li>
+        <li className={`d-${!loggesIn ? "none" : "block"}`}><Link to="/tasks">Tasks</Link></li>
+        <li className={`d-${!loggesIn ? "none" : "block"}`}><Link to="/blog">Blog</Link></li>
         <li><Link to="/contactUs">Contact Us</Link></li>
-        <li><Link to="/webinar">Webinar</Link></li>
+        <li className={`d-${!loggesIn ? "none" : "block"}`}><Link to="/webinar">Webinar</Link></li>
       </ul>
       <div className={`d-flex`} style={{gap:"30px"}}>
       <button className={`btn btn-success d-${loggesIn ? "none" : "block"}`} onClick={handleNav}>Log in</button>
