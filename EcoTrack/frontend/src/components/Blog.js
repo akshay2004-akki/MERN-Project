@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +10,10 @@ const Blog = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   //const [CommentCount, setCommentCount] = useState(0)
+  // const [message, setMessage] = useState("");
+
+  const blogsGridRef = useRef(null);
+  const imageRef = useRef(null);
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -124,6 +128,65 @@ const Blog = () => {
     route(`/blogs/${blogId}`);
   };
 
+  const handleDeleteComment = async (commentId) => {
+    try {
+      await axios
+        .delete(`http://localhost:8000/api/v4/comments/c/${commentId}`, {
+          withCredentials: true,
+        })
+        .then((response) => {
+          alert(response.data.message);
+          window.location.reload();
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleMouseMove = (e) => {
+    const container = blogsGridRef.current;
+    const image = imageRef.current; // Get the image reference
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    const rotateX = (y / rect.height) * 60;
+    const rotateY = -(x / rect.width) * 60;
+
+    // const shadowX = rotateY * 5;
+    // const shadowY = rotateX * 5;
+    // const shadowBlur = 20;
+    // const shadowColor = `rgba(0, 0, 0, 0.2)`;
+
+    container.style.transitionDuration = "0.3s"
+    container.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    // container.style.boxShadow = `${shadowX}px ${shadowY}px ${shadowBlur}px ${shadowColor}`;
+
+    if (image) {
+      // Adjust image position based on rotation
+      const imageX = -(x / rect.width) * 60;
+      const imageY = (y / rect.height) * 60;
+      const shadowX = rotateY * 5;
+      const shadowY = rotateX * 5;
+      const shadowBlur = 20;
+      const shadowColor = `rgba(0, 0, 0, 0.2)`;
+      image.style.transitionDuration = "0.2s"
+      image.style.transform = `translate(${imageX}px, ${imageY}px)`;
+      image.style.boxShadow = `${shadowX}px ${shadowY}px ${shadowBlur}px ${shadowColor}`;
+    }
+  };
+
+  const handleMouseLeave = () => {
+    const container = blogsGridRef.current;
+    const image = imageRef.current; // Get the image reference
+    container.style.transform = "rotateX(0deg) rotateY(0deg)";
+    container.style.boxShadow = "0px 4px 10px rgba(0, 0, 0, 0.1)";
+
+    if (image) {
+      image.style.transform = "translate(0px, 0px)";
+      image.style.boxShadow = "0px 4px 10px rgba(0, 0, 0, 0.1)"
+    }
+  };
+
   return (
     <div
       className="blog-container fixed-top"
@@ -154,13 +217,19 @@ const Blog = () => {
         </button>
       </div>
       {blogs.length > 0 && (
-        <div className="blogs-grid">
-          <div className="featured-blog" style={{ padding: "20px" }}>
+        <div
+          className="blogs-grid"
+        >
+          <div className="featured-blog" ref={blogsGridRef}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave} style={{ padding: "20px", border:"1px solid red" }}>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <img
                 src={blogs[0].coverImage}
                 alt={blogs[0].title}
                 className="featured-image"
+                ref={imageRef} // Attach the ref to the image
+                style={{borderRadius:"20px", transition: "transform 0.3s ease" }}
               />
             </div>
             <h2 className="blog-title">{blogs[0].title}</h2>
@@ -235,6 +304,15 @@ const Blog = () => {
                         >
                           {new Date(comment.createdAt).toLocaleString()}
                         </span>
+                        <button
+                          onClick={() =>
+                            handleDeleteComment(comment._id, blogs[0]._id)
+                          }
+                          className="btn btn-danger btn-sm"
+                          style={{ marginLeft: "10px" }}
+                        >
+                          Delete
+                        </button>
                       </li>
                     ))}
                   </ul>
@@ -343,6 +421,13 @@ const Blog = () => {
                               >
                                 {new Date(comment.createdAt).toLocaleString()}
                               </span>
+                              <button
+                                onClick={() => handleDeleteComment(comment._id)}
+                                className="btn btn-danger btn-sm"
+                                style={{ marginLeft: "10px" }}
+                              >
+                                Delete
+                              </button>
                             </li>
                           ))}
                         </ul>
@@ -448,6 +533,13 @@ const Blog = () => {
                               >
                                 {new Date(comment.createdAt).toLocaleString()}
                               </span>
+                              <button
+                                onClick={() => handleDeleteComment(comment._id)}
+                                className="btn btn-danger btn-sm"
+                                style={{ marginLeft: "10px" }}
+                              >
+                                Delete
+                              </button>
                             </li>
                           ))}
                         </ul>
