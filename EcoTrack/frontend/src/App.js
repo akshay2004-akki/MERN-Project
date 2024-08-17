@@ -13,6 +13,7 @@ import SignUp from './components/SignUp.js';
 import Survey from './components/Survey.js';
 import Profile from './components/Profile.js'
 import CreateBlog from './components/CreateBlog.js';
+import DetailedBlog from './components/DetailedBlog.js';
 
 function App() {
 
@@ -46,6 +47,7 @@ function App() {
           <Route path='/survey' element={localStorage.getItem('surveyCompleted') ? <Home /> : <Survey />} />
           <Route path='/profile' element = {<Profile/>}/>
           <Route path='/createBlog' element={<CreateBlog/>} />
+          <Route path='/blogs/:blogId' element={<DetailedBlog/>} />
         </Routes>
       </Router>
     </>

@@ -4,6 +4,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import { uploadOnCloudinary } from "../utils/uploadOnCloudinary.js";
+import { User } from "../models/user.model.js";
 
 export const createPost = asyncHandler(async (req, res) => {
   const userId = req.user?._id;
@@ -143,3 +144,26 @@ export const getAllPosts = asyncHandler(async (req, res) => {
     throw new ApiError(500, "Failed to fetch blog posts");
   }
 });
+
+export const getPostById = asyncHandler(async(req,res)=>{
+  const {blogId} = req.params;
+  if (!blogId || !isValidObjectId(blogId)) {
+    throw new ApiError(405, "Tweet Id is not valid");
+  }
+
+  let blogs = await Blog.findById(blogId)
+  if(!blogs){
+    res.status(404).send("Blog does not exist")
+    throw new ApiError(404,"Blog does not exist")
+  }
+
+  const {fullName} = await User.findById(blogs.author)
+
+  blogs = {...blogs,author : fullName}
+
+  return res  
+          .status(200)
+          .json(
+            new ApiResponse(200, blogs, "Blog Fetched succesfully")
+          )
+})
