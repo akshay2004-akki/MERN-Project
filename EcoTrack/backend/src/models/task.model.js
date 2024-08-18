@@ -1,17 +1,23 @@
-import mongoose, { Schema, model } from "mongoose";
+import mongoose from 'mongoose';
 
-const taskSchema = new Schema(
-  {
+const taskSchema = new mongoose.Schema({
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
-    tasksCompleted: {
-      type: [Boolean],
-      default: new Array(30).fill(false),
-    },
-  },
-  { timestamps: true }
-);
+    tasks: [
+        {
+            task: { type: String, required: true },
+            completed: { type: Boolean, default: false },
+            image : {type : String, required : true }
+        }
+    ],
+    lastGenerated: {
+        type: Date,
+        required: true,
+        default: Date.now
+    }
+});
 
-export const Task = model("Task", taskSchema)
+export const Task = mongoose.model('Task', taskSchema);

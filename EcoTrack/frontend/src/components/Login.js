@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import logo from "../Images/logo.jpg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Modal from './Modal'; // Import the Modal component
 
 const Login = ({ setIsLoggedIn, setAvatar }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [showModal, setShowModal] = useState(false); // State for modal visibility
   const route = useNavigate();
 
   const handleLogin = (e) => {
@@ -20,33 +22,32 @@ const Login = ({ setIsLoggedIn, setAvatar }) => {
     axios.post("http://localhost:8000/api/v4/users/login", loginData, { withCredentials: true })
       .then((response) => {
         // Handle success
-        // console.log(response.data);
-        alert(response.data.message);
-
-        // Update state
         setIsLoggedIn(true);
         setAvatar(response.data.data.avatar);
-
-        // Store login status and avatar in localStorage
         localStorage.setItem('isLoggedIn', true);
         localStorage.setItem('avatar', response.data.data.avatar);
-        if (!localStorage.getItem('surveyCompleted')) {
-          route('/survey');
-        } else {
-          route('/');
-        }
-
+        
+        setShowModal(true); // Show modal on success
 
       })
       .catch((error) => {
-        // Handle error
         console.error("There was an error logging in!", error);
         console.log(error.response.data);
       });
   };
 
+  const closeModal = () => {
+    setShowModal(false);
+    if (!localStorage.getItem('surveyCompleted')) {
+      route('/survey');
+    } else {
+      route('/');
+    }
+  };
+
   return (
     <div className="login-container">
+      {showModal && <Modal message="Login Successful!" onClose={closeModal} />} {/* Display modal */}
       <div className="sun"></div>
       <div className="login-form">
         <div className="login-header">

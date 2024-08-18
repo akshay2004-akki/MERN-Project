@@ -62,6 +62,8 @@ function Profile() {
         })
         .then((response) => {
           const data = response.data.data;
+          // console.log(data);
+          
           const name = data.fullName;
           const mail = data.email;
           const date = data.createdAt;
@@ -71,7 +73,7 @@ function Profile() {
           setJoinDate(new Date(date).toLocaleDateString());
         })
         .catch((error) => {
-          console.log(error.response.data);
+          console.log(error.response?.data);
         });
     };
     fetchDetails();

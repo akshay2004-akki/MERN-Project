@@ -1,30 +1,43 @@
-import axios from 'axios'
-// import { error } from 'highcharts'
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-
+import axios from 'axios';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Modal from './Modal'; // Import the Modal component
 
 function LogOut() {
-    const route = useNavigate()
-    const handleLogOut = async()=>{
-        await axios.post("http://localhost:8000/api/v4/users/logout",{},{withCredentials : true})
-            .then((res)=>{
-                localStorage.removeItem('isLoggedIn');
-                localStorage.removeItem('avatar');
-                localStorage.removeItem("surveyCompleted")
-                alert(res.data.message);
-                route("/login")
-                window.location.reload();
-            })
-            .catch((error)=>{
-                console.log(error.message);
-                
-            })
+  const route = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const handleLogOut = async () => {
+    try {
+      const res = await axios.post("http://localhost:8000/api/v4/users/logout", {}, { withCredentials: true });
+
+      // Clear localStorage
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('avatar');
+      localStorage.removeItem("surveyCompleted");
+
+      // Show success message in modal
+      setMessage(res.data.message);
+      setShowModal(true);
+
+    } catch (error) {
+      console.log(error.message);
     }
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    route("/login");
+    window.location.reload();
+  };
 
   return (
-    <button className='btn btn-danger' onClick={handleLogOut}>LogOut</button>
-  )
+    <>
+      {showModal && <Modal message={message} onClose={closeModal} />}
+      <button className='btn btn-danger' onClick={handleLogOut}>LogOut</button>
+    </>
+  );
 }
 
-export default LogOut
+export default LogOut;

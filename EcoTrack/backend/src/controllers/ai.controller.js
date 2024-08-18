@@ -20,17 +20,22 @@ export const generateCarbonFootprintPrediction = async (req, res) => {
         
         const existPrediction = await AiPrediction.findOne({userId : req.user.id})
         if(existPrediction){
-            res.status(409).send(true)
-            throw new ApiError(409, "prediction exist")
+            existPrediction.prediction = prediction;
+            await existPrediction.save()
+
+            res.status(200).json(new ApiResponse(200, {}, "Prediction updated successfully"));
         }
 
-        await AiPrediction.create({
-            userId: req.user.id,
-            surveyResponseId: surveyResponse._id,
-            prediction
-        });
+        else {
+            // If no prediction exists, create a new one
+            await AiPrediction.create({
+                userId: req.user.id,
+                surveyResponseId: surveyResponse._id,
+                prediction
+            });
 
-        res.status(200).json(new ApiResponse(200,{}, "Prediction generated succesfully"));
+            res.status(200).json(new ApiResponse(200, {}, "Prediction generated successfully"));
+        }
     } catch (error) {
         res.status(500).json(error?.message);
     }
