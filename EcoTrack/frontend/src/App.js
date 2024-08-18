@@ -14,6 +14,7 @@ import Survey from './components/Survey.js';
 import Profile from './components/Profile.js'
 import CreateBlog from './components/CreateBlog.js';
 import DetailedBlog from './components/DetailedBlog.js';
+import MyBlogs from './components/MyBlogs.js';
 
 function App() {
 
@@ -48,6 +49,7 @@ function App() {
           <Route path='/profile' element = {<Profile/>}/>
           <Route path='/createBlog' element={<CreateBlog/>} />
           <Route path='/blogs/:blogId' element={<DetailedBlog/>} />
+          <Route path='/myBlogs' element = {<MyBlogs/>} />
         </Routes>
       </Router>
     </>

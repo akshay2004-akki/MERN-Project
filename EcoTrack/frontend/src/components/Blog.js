@@ -170,7 +170,7 @@ const Blog = () => {
       const shadowBlur = 20;
       const shadowColor = `rgba(0, 0, 0, 0.2)`;
       image.style.transitionDuration = "0.2s"
-      image.style.transform = `translate(${imageX}px, ${imageY}px) scale(1.07)`;
+      image.style.transform = `translate(${imageX}px, ${imageY}px) scale(1.2)`;
       image.style.boxShadow = `${shadowX}px ${shadowY}px ${shadowBlur}px ${shadowColor}`;
     }
   };

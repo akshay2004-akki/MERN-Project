@@ -73,12 +73,12 @@ export const getUserPosts = asyncHandler(async (req, res) => {
   try {
     const blogs = await Blog.find({ author: userId })
       .sort({ createdAt: -1 }) // Sort by creation date, most recent first
-      .populate("author", "name"); // Optionally populate author details
+      .populate("author", "fullName"); // Optionally populate author details
 
     if (blogs.length === 0) {
       return res
-        .status(404)
-        .json(new ApiResponse(404, [], "No posts found for this user"));
+        .status(200)
+        .json(new ApiResponse(200, [], "No posts found for this user"));
     }
 
     return res

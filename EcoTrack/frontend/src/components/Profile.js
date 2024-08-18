@@ -12,6 +12,7 @@ import {
 } from "chart.js";
 import axios from "axios";
 import LogOut from "./LogOut";
+import { useNavigate } from "react-router-dom";
 
 ChartJS.register(
   Title,
@@ -193,6 +194,12 @@ function Profile() {
     },
   };
 
+  const route = useNavigate();
+
+  const handleNav = ()=>{
+    route("/myBlogs")
+  }
+
   return (
     <div
       style={{
@@ -241,6 +248,7 @@ function Profile() {
             )}
             days
           </p>
+          <button className="btn btn-primary mx-2" onClick={handleNav}>My Blogs</button>
           <LogOut />
         </div>
       </div>
