@@ -11,7 +11,7 @@ const genAi = new GoogleGenerativeAI(process.env.GENERATIVE_AI_API);
 
 const generateTasksForUser = async (userId) => {
     const model = genAi.getGenerativeModel({ model: "gemini-1.5-flash" });
-    const prompt = "Generate a new set of 20 easy tasks for an individual that can help to reduce carbon emissions";
+    const prompt = "Generate a new set of 20 outdoor tasks for an individual that can help to reduce carbon emissions";
 
     const result = await model.generateContent(prompt);
     const response = result.response;

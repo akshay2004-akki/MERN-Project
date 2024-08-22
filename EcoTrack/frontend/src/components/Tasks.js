@@ -74,7 +74,7 @@ function Tasks() {
               type="checkbox"
               checked={task.completed}
               onChange={() => handleTaskCompletion(index)}
-              // className="task-checkbox"
+              className="task-checkbox"
             />
             <span className="task-text">{task.task}</span>
           </li>

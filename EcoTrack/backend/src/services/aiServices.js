@@ -38,8 +38,8 @@ export const predictCarbonEmissionsFromSurvey = async (surveyData) => {
             - Heating Usage: ${heatingUsageDescription}
             - Cooling Usage: ${coolingUsageDescription}
 
-            Please provide an estimated value of total CO2 emissions per year and highlight the estimated value. 
-            Provide detailed calculations for the estimated values. And don't include these types of sentences "It's impossible to provide a precise carbon emission estimate without specific data"
+            Please provide an estimated value of total CO2/year and highlight the estimated value. 
+            Provide detailed calculations for the estimated values (use unit CO2/year), and the user is currentlu living in India. And don't include these types of sentences "It's impossible to provide a precise carbon emission estimate without specific data"
         `;
 
         const result = await model.generateContent(prompt);

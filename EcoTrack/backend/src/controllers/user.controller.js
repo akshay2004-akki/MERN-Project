@@ -4,6 +4,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/uploadOnCloudinary.js";
 import jwt from 'jsonwebtoken'
+import nodemailer from 'nodemailer'
 
 const getAccessAndRefreshToken = async (userId)=>{
     const user = await User.findById(userId);
@@ -17,6 +18,64 @@ const getAccessAndRefreshToken = async (userId)=>{
     return {refreshToken, accessToken};
 }
 
+const transpoter = nodemailer.createTransport({
+    service:"gmail",
+    auth:{
+        user : process.env.EMAIL_USER,
+        pass : process.env.EMAIL_PASSWORD
+    }
+})
+
+const sendEmail = (to, subject, text)=>{
+    const mailOptions = {
+        from : process.env.EMAIL_USER,
+        to,
+        subject,
+        text
+    }
+    transpoter.sendMail(mailOptions, (error, info)=>{
+        if (error) {
+            console.error('Error sending email:', error);
+          } else {
+            console.error('Email sent:', info.response);
+          }
+    })
+}
+
+const generateCode = () => {
+    return Math.floor(1000 + Math.random() * 9000); // Ensure a 4-digit code
+}
+
+let globalCode;
+export const sendCode = asyncHandler(async (req, res) => {
+    const { email } = req.body;
+    if (!email) {
+        throw new ApiError(400, "Email is required");
+    }
+
+    globalCode = generateCode();
+    const emailText = `Hi, this is Team EcoTrack\nYour Verification code is: ${globalCode}\n\nRegards,\nTeam EcoTrack`;
+
+    try {
+        await sendEmail(email, "Email verification", emailText);
+        return res.status(200).json(new ApiResponse(200, {}, "Code sent"));
+    } catch (error) {
+        throw new ApiError(500, "Error sending email");
+    }
+});
+
+export const verifyCode = asyncHandler(async (req, res) => {
+    const { code } = req.body;
+    if (!code || code.trim() === "") {
+        throw new ApiError(400, "Please enter the code");
+    }
+    if (code !== globalCode.toString()) {
+        throw new ApiError(409, "Invalid code");
+    }
+
+    globalCode = null; // Clear the code after successful verification
+    return res.status(200).json(new ApiResponse(200, true, "Code verified"));
+});
 export const registerUser = asyncHandler(async(req,res)=>{
     const {fullName, email, password, role} = req.body;
     

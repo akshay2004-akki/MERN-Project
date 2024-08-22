@@ -12,7 +12,7 @@ import {
 } from "chart.js";
 import axios from "axios";
 import LogOut from "./LogOut";
-import { useNavigate } from "react-router-dom";
+import { replace, useNavigate } from "react-router-dom";
 
 ChartJS.register(
   Title,
@@ -27,8 +27,7 @@ ChartJS.register(
 // Function to extract emissions data
 const extractEmissionsData = (htmlString) => {
   const data = {};
-  const regex =
-    /\* <strong class="highlight">([^<]+)<\/strong>.*?(\d+ kg CO2\/year)/g;
+  const regex = /\* <strong class="highlight">([^<]+)<\/strong>.*?(\d+)\s*kg CO2\/year/g;
   let match;
 
   while ((match = regex.exec(htmlString)) !== null) {
@@ -38,7 +37,7 @@ const extractEmissionsData = (htmlString) => {
   }
 
   return data;
-};
+}
 
 function Profile() {
   const [url, setUrl] = useState("");
@@ -86,21 +85,29 @@ function Profile() {
           "http://localhost:8000/api/v4/ai/getPrediction",
           { withCredentials: true }
         );
+        console.log(res);
+        
         const formattedData = res.data.data
           .replace(/\*\*(.*?)\*\*/g, '<strong class="highlight">$1</strong>')
           .replace(/\n/g, "<br/>")
           .replace(/CO2 per year/gi, "CO2/year") // Replaces "CO2 per year" with "CO2/year" (case-insensitive)
-          .replace(/CO2 \/ year/gi, "CO2/year") // Replaces "CO2 / year" with "CO2/year" (handles spaces)
+          .replace(/CO2e per year/gi, "CO2/year")
+          .replace(/CO2e/gi, "CO2/year")
+          .replace(/CO2 \/ year/gi, "CO2/year")// Replaces "CO2 / year" with "CO2/year" (handles spaces)
+          .replace(/CO2e \/ year/gi, "CO2/year") 
           .replace(/CO2\/year/gi, "CO2/year") // Replaces "CO2/year" with "CO2/year" (ensures consistency)
           .replace(/\bCO2\b(?!\/year)/gi, "CO2/year"); // Replaces standalone "CO2" with "CO2/year" unless it already has "/year"
+          
 
         // Set the raw data to display
-        console.log(formattedData);
+        //console.log('Formatted',formattedData);
 
         setData(formattedData);
 
         // Extract emissions data
         const extractedData = extractEmissionsData(formattedData);
+        console.log("Extracted data : ",extractedData);
+        
         setEmissionsData(extractedData);
         console.log(emissionsData);
       } catch (error) {
@@ -283,6 +290,9 @@ function Profile() {
           <div style={{ width: "500px", height: "300px" }}>
             <Bar data={barChartData} options={barOptions} />
           </div>
+        </div>
+        <div>
+          <div dangerouslySetInnerHTML={{__html:data}}></div>
         </div>
       </div>
     </div>

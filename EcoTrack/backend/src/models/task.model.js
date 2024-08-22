@@ -10,7 +10,7 @@ const taskSchema = new mongoose.Schema({
         {
             task: { type: String, required: true },
             completed: { type: Boolean, default: false },
-            image : {type : String, required : true }
+            image : {type : String }
         }
     ],
     lastGenerated: {
