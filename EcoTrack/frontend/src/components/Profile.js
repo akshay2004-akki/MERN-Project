@@ -90,6 +90,7 @@ function Profile() {
         const formattedData = res.data.data
           .replace(/\*\*(.*?)\*\*/g, '<strong class="highlight">$1</strong>')
           .replace(/\n/g, "<br/>")
+          .replace(/tonnes/g, "kg")
           .replace(/CO2 per year/gi, "CO2/year") // Replaces "CO2 per year" with "CO2/year" (case-insensitive)
           .replace(/CO2e per year/gi, "CO2/year")
           .replace(/CO2e/gi, "CO2/year")

@@ -1484,3 +1484,98 @@ h2 {
     transform: scale(1);
   }
 }
+
+/* SignUp.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+
+.signup-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: url(./Images/pexels-hilaryh-38012.jpg);
+  position: absolute;
+  top: 0;
+  height: 153vh;
+}
+
+.signup-container {
+  background: transparent;
+  backdrop-filter: blur(4px);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  transform: translateY(40px);
+  box-shadow: 0 0 10px #fff;
+}
+
+.signup-container h1 {
+  font-size: 2.2em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+  
+}
+
+.input-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  border-color: #6a11cb;
+  outline: none;
+}
+
+.code-button,
+.signup-button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.code-button:hover,
+.signup-button:hover {
+  background: linear-gradient(to right, #2575fc, #6a11cb);
+}
+
+.code-button:focus,
+.signup-button:focus {
+  outline: none;
+}
+
+.signup-container button {
+  margin-top: 20px;
+}
+
+.signup-container input[type="file"] {
+  padding: 5px;
+}

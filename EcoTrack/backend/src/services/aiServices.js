@@ -39,7 +39,7 @@ export const predictCarbonEmissionsFromSurvey = async (surveyData) => {
             - Cooling Usage: ${coolingUsageDescription}
 
             Please provide an estimated value of total CO2/year and highlight the estimated value. 
-            Provide detailed calculations for the estimated values (use unit CO2/year), and the user is currentlu living in India. And don't include these types of sentences "It's impossible to provide a precise carbon emission estimate without specific data"
+            Provide detailed calculations for the estimated values (use unit CO2/year), and the user is currentlu living in India. And always use this unit kg CO2/year and do not include units like kg CO2/year/kWh etc. Use only kg CO2/year. And don't include these types of sentences "It's impossible to provide a precise carbon emission estimate without specific data"
         `;
 
         const result = await model.generateContent(prompt);

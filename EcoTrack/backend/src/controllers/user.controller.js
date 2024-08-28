@@ -42,40 +42,42 @@ const sendEmail = (to, subject, text)=>{
     })
 }
 
-const generateCode = () => {
-    return Math.floor(1000 + Math.random() * 9000); // Ensure a 4-digit code
-}
+// const generateCode = () => {
+//     return Math.floor(1000 + Math.random() * 9000); // Ensure a 4-digit code
+// }
 
-let globalCode;
-export const sendCode = asyncHandler(async (req, res) => {
-    const { email } = req.body;
-    if (!email) {
-        throw new ApiError(400, "Email is required");
-    }
+// let globalCode;
+// export const sendCode = asyncHandler(async (req, res) => {
+//     const { email } = req.body;
+//     if (!email) {
+//         throw new ApiError(400, "Email is required");
+//     }
 
-    globalCode = generateCode();
-    const emailText = `Hi, this is Team EcoTrack\nYour Verification code is: ${globalCode}\n\nRegards,\nTeam EcoTrack`;
+//     globalCode = generateCode();
+//     const emailText = `Hi, this is Team EcoTrack\nYour Verification code is: ${globalCode}\n\nRegards,\nTeam EcoTrack`;
 
-    try {
-        await sendEmail(email, "Email verification", emailText);
-        return res.status(200).json(new ApiResponse(200, {}, "Code sent"));
-    } catch (error) {
-        throw new ApiError(500, "Error sending email");
-    }
-});
+//     try {
+//         await sendEmail(email, "Email verification", emailText);
+//         return res.status(200).json(new ApiResponse(200, {}, "Code sent"));
+//     } catch (error) {
+//         throw new ApiError(500, "Error sending email");
+//     }
+// });
 
-export const verifyCode = asyncHandler(async (req, res) => {
-    const { code } = req.body;
-    if (!code || code.trim() === "") {
-        throw new ApiError(400, "Please enter the code");
-    }
-    if (code !== globalCode.toString()) {
-        throw new ApiError(409, "Invalid code");
-    }
+// export const verifyCode = asyncHandler(async (req, res) => {
+//     const { code } = req.body;
+//     if (!code || code.trim() === "") {
+//         throw new ApiError(400, "Please enter the code");
+//     }
+//     if (code !== globalCode.toString()) {
+//         throw new ApiError(409, "Invalid code");
+//     }
 
-    globalCode = null; // Clear the code after successful verification
-    return res.status(200).json(new ApiResponse(200, true, "Code verified"));
-});
+//     globalCode = null; // Clear the code after successful verification
+//     return res.status(200).json(new ApiResponse(200, true, "Code verified"));
+// });
+
+
 export const registerUser = asyncHandler(async(req,res)=>{
     const {fullName, email, password, role} = req.body;
     
