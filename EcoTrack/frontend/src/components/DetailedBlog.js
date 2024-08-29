@@ -82,6 +82,7 @@ function DetailedBlog() {
           src={blog._doc.coverImage}
           alt={blog._doc.title}
           className="detailed-blog-image"
+          style={{objectFit:"contain"}}
         />
         <div className="detailed-blog-content-wrapper">
           <h1 className="detailed-blog-title">{blog._doc.title}</h1>

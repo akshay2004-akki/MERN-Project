@@ -90,7 +90,7 @@ function SignUp() {
         <h1>Sign Up</h1>
         <form onSubmit={handleSignUp}>
           <div className="input-group">
-            <label htmlFor="fullName">Full Name</label>
+            <label style={{color:"#fff"}} htmlFor="fullName">Full Name</label>
             <input
               type="text"
               id="fullName"
@@ -101,7 +101,7 @@ function SignUp() {
             />
           </div>
           <div className="input-group">
-            <label htmlFor="email">Email</label>
+            <label style={{color:"#fff"}} htmlFor="email">Email</label>
             <input
               type="email"
               id="email"
@@ -110,12 +110,12 @@ function SignUp() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <button onClick={sendCode} className="code-button">
+            {/* <button onClick={sendCode} className="code-button">
               Send Code
-            </button>
+            </button> */}
           </div>
-          <div className="input-group">
-            <label htmlFor="code">Verification Code</label>
+          {/* <div className="input-group">
+            <label style={{color:"#fff"}} htmlFor="code">Verification Code</label>
             <input
               type="text"
               id="code"
@@ -127,9 +127,9 @@ function SignUp() {
             <button onClick={verifyCode} className="code-button">
               Verify Code
             </button>
-          </div>
+          </div> */}
           <div className="input-group">
-            <label htmlFor="password">Password</label>
+            <label style={{color:"#fff"}} htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
@@ -141,7 +141,7 @@ function SignUp() {
             />
           </div>
           <div className="input-group">
-            <label htmlFor="role">Role</label>
+            <label style={{color:"#fff"}} htmlFor="role">Role</label>
             <select
               id="role"
               name="role"
@@ -154,7 +154,7 @@ function SignUp() {
             </select>
           </div>
           <div className="input-group">
-            <label htmlFor="avatar">Avatar</label>
+            <label style={{color:"#fff"}} htmlFor="avatar">Avatar</label>
             <input
               type="file"
               id="avatar"

@@ -118,7 +118,7 @@ function Home() {
       {
         name: "Emissions",
         data: [
-          [`${res}`, 30],
+          [`${res || "SAS Nagar Mohali"}`, 30],
           ["Chandigarh", 15],
           ["Delhi", 55]
         ],

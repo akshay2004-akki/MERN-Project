@@ -1497,8 +1497,21 @@ h2 {
   background: url(./Images/pexels-hilaryh-38012.jpg);
   position: absolute;
   top: 0;
-  height: 153vh;
+  height: 130vh;
+  position: relative;
+  font-family: Ubuntu;
 }
+
+.signup-page::after{
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 130vh;
+  width: 100%;
+  background-color: #1111116e;
+  z-index: 1;
+}
+
 
 .signup-container {
   background: transparent;
@@ -1509,8 +1522,9 @@ h2 {
   max-width: 400px;
   width: 100%;
   text-align: center;
-  transform: translateY(40px);
+  transform: translateY(10px);
   box-shadow: 0 0 10px #fff;
+  z-index: 3;
 }
 
 .signup-container h1 {

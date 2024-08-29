@@ -3,7 +3,9 @@ import React from 'react';
 import arya from '../Images/WhatsApp Image 2023-01-04 at 14.41.10.jpg'
 import abdul from '../Images/PHOTO.jpg'
 import akshay from '../Images/resume pic3.jpeg'
-import akash from '../Images/image.png'
+import akash from '../Images/akash.jpg'
+import akanksha from '../Images/akanksha.jpg'
+import adrash from '../Images/adrash.jpg'
 
 function About() {
   return (
@@ -34,6 +36,14 @@ function About() {
         <div className="gallery-item">
           <img src={akash} alt="Team Member 4" className="gallery-image" />
           <div className="image-text">Akash Kumar: Sustainability Expert</div>
+        </div>
+        <div className="gallery-item">
+          <img src={akanksha} alt="Team Member 4" className="gallery-image" />
+          <div className="image-text">Akanksha Raj: UX/UI Designer</div>
+        </div>
+        <div className="gallery-item">
+          <img src={adrash} alt="Team Member 4" className="gallery-image" />
+          <div className="image-text">Adrash Kumar: Sustainability Expert</div>
         </div>
       </div>
     </div>
