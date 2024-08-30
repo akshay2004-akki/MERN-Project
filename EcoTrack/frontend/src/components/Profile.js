@@ -119,7 +119,7 @@ function Profile() {
     };
 
     fetchData();
-  }, [emissionsData]);
+  }, []);
 
   // Prepare data for charts
   const pieChartData = {

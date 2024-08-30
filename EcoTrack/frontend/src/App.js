@@ -15,6 +15,7 @@ import Profile from './components/Profile.js'
 import CreateBlog from './components/CreateBlog.js';
 import DetailedBlog from './components/DetailedBlog.js';
 import MyBlogs from './components/MyBlogs.js';
+import LeaderBoard from './components/LeaderBoard.js';
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
           <Route path='/createBlog' element={<CreateBlog/>} />
           <Route path='/blogs/:blogId' element={<DetailedBlog/>} />
           <Route path='/myBlogs' element = {<MyBlogs/>} />
+          <Route path='/leaderboard' element={<LeaderBoard/>} />
         </Routes>
       </Router>
     </>

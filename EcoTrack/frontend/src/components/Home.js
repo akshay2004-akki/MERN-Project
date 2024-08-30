@@ -226,6 +226,10 @@ function Home() {
     ],
   };
 
+  const handlenavigate = ()=>{
+    route("/leaderboard")
+  }
+
   return (
     <>
       <div className="landing-page" style={{ height: "100vh" }}>
@@ -248,7 +252,7 @@ function Home() {
             Join the journey towards a sustainable future. Monitor, reduce, and
             offset your carbon emissions with EcoTrack.
           </p>
-          <button className="cta-button">Get Started</button>
+          <button className="cta-button" onClick={handlenavigate}>LeaderBoard</button>
         </div>
       </div>
       <div

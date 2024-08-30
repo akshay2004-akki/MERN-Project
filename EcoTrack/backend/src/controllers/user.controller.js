@@ -308,3 +308,16 @@ export const updateAccountDetails = asyncHandler(async(req,res)=>{
             .status(200)
             .json(new ApiResponse(200,user,"User details updated successfully"))
 })
+
+export const fetchAllUsers = asyncHandler(async(req,res)=>{
+    try {
+        const users = await User.find({});
+    
+        return res
+                .status(200)
+                .json(new ApiResponse(200, users, "LeaderBoard Fetched successfully"))
+    } catch (error) {
+        res.status(500).send("An error occured while fetcing the Leaderboard")
+        throw new ApiError(500,"An error occured while fetcing the Leaderboard")
+    }
+})
