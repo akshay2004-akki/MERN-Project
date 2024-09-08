@@ -183,7 +183,7 @@ export const getUserDetails = asyncHandler(async(req,res)=>{
     return res
             .status(200)
             .json(new ApiResponse(200, user, "User data fetched successfully"))
-})
+}) 
 
 export const refreshAccessToken = asyncHandler(async (req,res)=>{
     //console.log(req.cookies.refreshToken);
