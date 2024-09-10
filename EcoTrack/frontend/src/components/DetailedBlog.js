@@ -74,9 +74,6 @@ function DetailedBlog() {
     <div style={{ transform: "translateY(90px)", padding: "20px" }}>
       <div
         className="detailed-blog-container"
-        ref={containerRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
       >
         <img
           src={blog._doc.coverImage}

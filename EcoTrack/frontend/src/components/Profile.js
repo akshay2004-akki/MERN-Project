@@ -292,6 +292,7 @@ function Profile() {
             <Bar data={barChartData} options={barOptions} />
           </div>
         </div>
+        <br />
         <div>
           <div dangerouslySetInnerHTML={{__html:data}}></div>
         </div>

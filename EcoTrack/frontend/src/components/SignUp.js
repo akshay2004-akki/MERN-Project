@@ -10,6 +10,7 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("Individual");
   const [avatar, setAvatar] = useState(null);
+  const [avatarPreview, setAvatarPreview] = useState(null); // State to store image preview
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState("");
   const [code, setCode] = useState("");
@@ -46,40 +47,11 @@ function SignUp() {
     route("/login");
   };
 
-  const verifyCode = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/api/v4/users/verifyCode",
-        { code },
-        { withCredentials: true }
-      );
-      console.log("Verification response:", response.data);
-      alert("Code verified successfully");
-      setVerified(response.data.data);
-    } catch (error) {
-      console.error("Error verifying code:", error);
-      alert("Code verification failed");
-      setShowModal(true);
-    }
-  };
-
-  const sendCode = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/api/v4/users/sendCode",
-        { email },
-        { withCredentials: true }
-      );
-      console.log("Code sent response:", response.data);
-      alert("Verification code sent to your email");
-    } catch (error) {
-      console.error("Error sending code:", error);
-      alert("Failed to send verification code");
-      setShowModal(true);
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    setAvatar(file);
+    if (file) {
+      setAvatarPreview(URL.createObjectURL(file)); // Create object URL for preview
     }
   };
 
@@ -110,24 +82,7 @@ function SignUp() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            {/* <button onClick={sendCode} className="code-button">
-              Send Code
-            </button> */}
           </div>
-          {/* <div className="input-group">
-            <label style={{color:"#fff"}} htmlFor="code">Verification Code</label>
-            <input
-              type="text"
-              id="code"
-              name="code"
-              required
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-            />
-            <button onClick={verifyCode} className="code-button">
-              Verify Code
-            </button>
-          </div> */}
           <div className="input-group">
             <label style={{color:"#fff"}} htmlFor="password">Password</label>
             <input
@@ -160,9 +115,18 @@ function SignUp() {
               id="avatar"
               name="avatar"
               required
-              onChange={(e) => setAvatar(e.target.files[0])}
+              onChange={handleAvatarChange}
             />
           </div>
+          {avatarPreview && (
+            <div className="avatar-preview">
+              <img
+                src={avatarPreview}
+                alt="Avatar Preview"
+                style={{ width: "150px", height: "150px", borderRadius: "50%" }}
+              />
+            </div>
+          )}
           <button type="submit" className="signup-button">
             Sign Up
           </button>
