@@ -1,135 +1,116 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import image from '../Images/contact.webp';
+import React, { useState } from "react";
+import axios from "axios";
+// import './Webinar.css'; // Import CSS for styling
 
 function Webinar() {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        date: ''
-    });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    date: "",
+  });
 
-    const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
-    // Handle form input changes
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value
-        }));
-    };
+  // Handle form input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
-    // Handle form submission
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:8000/api/v4/webinar/register', formData, {
-                withCredentials: true,
-            });
-            setMessage(response.data.message || 'Webinar registered successfully!');
-            // Clear form after submission
-            setFormData({
-                name: '',
-                email: '',
-                date: ''
-            });
-        } catch (error) {
-            console.log(error);
-            setMessage('Error: ' + error.response.data || error.message);
-        }
-    };
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/v4/webinar/register",
+        formData
+      );
+      setMessage(response.data.message || "Webinar registered successfully!");
+      // Clear form after submission
+      setFormData({
+        name: "",
+        email: "",
+        date: "",
+      });
+    } catch (error) {
+      setMessage("Error: " + error.response.data || error.message);
+    }
+  };
 
-    return (
-        <div style={{
-            backgroundImage: `url`, // Replace with your background image URL
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            padding: '50px 0',
-            minHeight: '100vh',
-            color: '#fff',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            fontFamily: 'Ubuntu, sans-serif'
-        }}>
-            <div style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                padding: '40px',
-                borderRadius: '8px',
-                width: '400px',
-                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-            }}>
-                <h2 style={{ color: '#333', textAlign: 'center', marginBottom: '30px' }}>Register for Webinar</h2>
-                <form onSubmit={handleSubmit}>
-                    <div style={{ marginBottom: '15px' }}>
-                        <label htmlFor="name" style={{ display: 'block', marginBottom: '5px', color: '#333' }}>Name:</label>
-                        <input 
-                            type="text" 
-                            id="name" 
-                            name="name" 
-                            value={formData.name} 
-                            onChange={handleChange} 
-                            required 
-                            style={{
-                                width: '100%',
-                                padding: '10px',
-                                borderRadius: '4px',
-                                border: '1px solid #ccc',
-                            }}
-                        />
-                    </div>
-                    <div style={{ marginBottom: '15px' }}>
-                        <label htmlFor="email" style={{ display: 'block', marginBottom: '5px', color: '#333' }}>Email:</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            value={formData.email} 
-                            onChange={handleChange} 
-                            required 
-                            style={{
-                                width: '100%',
-                                padding: '10px',
-                                borderRadius: '4px',
-                                border: '1px solid #ccc',
-                            }}
-                        />
-                    </div>
-                    <div style={{ marginBottom: '20px' }}>
-                        <label htmlFor="date" style={{ display: 'block', marginBottom: '5px', color: '#333' }}>Preferred Date:</label>
-                        <input 
-                            type="date" 
-                            id="date" 
-                            name="date" 
-                            value={formData.date} 
-                            onChange={handleChange} 
-                            required 
-                            style={{
-                                width: '100%',
-                                padding: '10px',
-                                borderRadius: '4px',
-                                border: '1px solid #ccc',
-                            }}
-                        />
-                    </div>
-                    <button type="submit" style={{
-                        width: '100%',
-                        padding: '10px',
-                        backgroundColor: '#007bff',
-                        color: '#fff',
-                        border: 'none',
-                        borderRadius: '4px',
-                        cursor: 'pointer',
-                        fontSize: '16px',
-                    }}>
-                        Submit
-                    </button>
-                </form>
-                {message && <p style={{ marginTop: '20px', textAlign: 'center', color: '#333' }}>{message}</p>}
-            </div>
+  return (
+    <div
+      className="webinar-registration-container"
+      style={{
+        transform: "tranlateY(90px)",
+        height: "90vh",
+        fontFamily: "Ubuntu",
+        backgroundImage: `
+        radial-gradient(circle at top right, rgba(138, 43, 226, 0.4), transparent 50%),
+        radial-gradient(circle at bottom center, rgba(138, 43, 226, 0.4), transparent 50%)
+      `,
+      backgroundColor: '#242222'
+      }}
+    >
+      {/* Left Section */}
+      <div className="webinar-left-section">
+        <div className="branding">
+          {/* <img className="webinar-logo" src="logo.png" alt="Webinar Logo" /> */}
+          {/* <h1>Webinar Title</h1>
+          <p>A powerful, yet easy-to-use application for managing webinars and registrations.</p> */}
         </div>
-    );
+        {/* <div className="version">Version 2.1</div> */}
+      </div>
+
+      {/* Right Section - Form */}
+      <div className="webinar-right-section">
+        <div className="form-container">
+          <h2>Register for <span style={{color:"aqua"}}>Webinar</span></h2>
+          <form onSubmit={handleSubmit}>
+            <div className="input-group">
+              <label htmlFor="name">Name:</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="input-group">
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="input-group">
+              <label htmlFor="date">Preferred Date:</label>
+              <input
+                type="date"
+                id="date"
+                name="date"
+                value={formData.date}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <button type="submit" className="submit-button" style={{backgroundColor:"aqua", color:"#121212"}}>
+              Submit
+            </button>
+          </form>
+          {message && <p className="message">{message}</p>}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Webinar;

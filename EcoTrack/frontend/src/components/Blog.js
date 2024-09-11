@@ -191,10 +191,14 @@ const Blog = () => {
     <div
       className="blog-container fixed-top"
       style={{
-        transform: "translateY(80px)",
         padding: "30px",
         height: "100vh",
         overflow: "scroll",
+        backgroundImage: `
+        radial-gradient(circle at top left, rgba(138, 43, 226, 0.4), transparent 50%),
+        radial-gradient(circle at bottom right, rgba(138, 43, 226, 0.4), transparent 50%)
+      `,
+      backgroundColor: '#242222'
       }}
     >
       <div
@@ -210,7 +214,7 @@ const Blog = () => {
         <button
           className="btn btn-success"
           onClick={handleCreateBlog}
-          style={{ borderRadius: "20px", fontSize: "25px" }}
+          style={{ borderRadius: "20px", fontSize: "25px", transform:"translateY(90px)" }}
         >
           <i className="fa-brands fa-blogger"></i>{" "}
           <i className="fa-solid fa-plus"></i>
@@ -219,10 +223,11 @@ const Blog = () => {
       {blogs.length > 0 && (
         <div
           className="blogs-grid"
+          style={{
+            transform: "translateY(80px)",
+          }}
         >
-          <div className="featured-blog" ref={blogsGridRef}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave} style={{ padding: "20px", border:"1px solid black" }}>
+          <div className="featured-blog" style={{ padding: "20px", boxShadow:"0 0 6px #fff" }}>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <img
                 src={blogs[0].coverImage}
@@ -232,15 +237,15 @@ const Blog = () => {
                 style={{borderRadius:"20px", transition: "transform 0.3s ease", border:"1px solid red" }}
               />
             </div>
-            <h2 className="blog-title">{blogs[0].title}</h2>
+            <h2 className="blog-title" style={{color:"#fff"}}>{blogs[0].title}</h2>
             <p className="blog-snippet">
-              <p className="blog-author">By: {blogs[0].author.fullName}</p>
-              <span style={{ color: "#000", fontWeight: "600" }}>
+              <p className="blog-author" style={{color:"#fff"}}>By: {blogs[0].author.fullName}</p>
+              <span style={{ color: "#fff", fontWeight: "600" }}>
                 {blogs[0].content.slice(0, 100)}...
               </span>{" "}
               <br />
-              <span>{blogs[0].likes} Likes</span> |{" "}
-              <span>{blogs[0].totalComments} Comments</span> <br />
+              <span style={{color:"#fff"}}>{blogs[0].likes} Likes</span> |{" "}
+              <span style={{color:"#fff"}}>{blogs[0].totalComments} Comments</span> <br />
               <div style={{ display: "flex", gap: "20px" }}>
                 <button
                   className="like-button btn btn-primary"
@@ -332,28 +337,28 @@ const Blog = () => {
 
           <div
             className="other-blogs"
-            style={{ height: "90vh", overflow: "scroll" }}
+            style={{ height: "90vh", overflow: "scroll", padding:"10px" }}
           >
             <div>
               {blogs.slice(1, 4).map((blog) => (
-                <div key={blog._id} className="blog-card">
+                <div key={blog._id} className="blog-card" style={{backgroundColor:"transparent", boxShadow:"0 0 6px #fff", padding:"10px"}}>
                   <img
                     src={blog.coverImage}
                     alt={blog.title}
                     className="blog-image"
                   />
                   <div className="blog-content">
-                    <h3 className="blog-title">{blog.title}</h3>
-                    <p className="blog-author">By: {blog.author.fullName}</p>
+                    <h3 className="blog-title" style={{color:"#fff"}}>{blog.title}</h3>
+                    <p className="blog-author" style={{color:"#fff"}}>By: {blog.author.fullName}</p>
                     <p
                       className="blog-snippet"
-                      style={{ color: "#000", fontWeight: "600" }}
+                      style={{ color: "#fff", fontWeight: "600", }}
                     >
                       {blog.content.slice(0, 60)}...
                     </p>
                     <div className="blog-meta">
-                      <span>{blog.likes} Likes</span> |{" "}
-                      <span>{blog.totalComments} Comments</span>
+                      <span style={{color:"#fff"}}>{blog.likes} Likes</span> |{" "}
+                      <span style={{color:"#fff"}}>{blog.totalComments} Comments</span>
                     </div>
                     <div style={{ display: "flex", gap: "20px" }}>
                       <button

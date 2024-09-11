@@ -30,18 +30,18 @@ const Navbar = ({loggesIn, avatar}) => {
         route("/profile")
       }
   return (
-    <nav className="navbar fixed-top" style={{backgroundColor: `${bgColor}`}}>
+    <nav className="navbar fixed-top" style={{backgroundColor: `${bgColor}`, zIndex:"3000"}}>
       <div className="logo">
         <img src={logo} alt="Environment" />
         <span>EcoTrack</span> 
       </div>
       <ul className="nav-links">
-        <li><Link to="/">Home</Link></li>
-        <li ><Link to="/about">About</Link></li>
-        <li className={`d-${!loggesIn ? "none" : "block"}`}><Link to="/tasks">Tasks</Link></li>
-        <li className={`d-${!loggesIn ? "none" : "block"}`}><Link to="/blog">Blog</Link></li>
-        <li><Link to="/contactUs">Contact Us</Link></li>
-        <li className={`d-${!loggesIn ? "none" : "block"}`}><Link to="/webinar">Webinar</Link></li>
+        <li ><Link to="/" style={{color:"green"}}>Home</Link></li>
+        <li ><Link to="/about" style={{color:"green"}}>About</Link></li>
+        <li className={`d-${!loggesIn ? "none" : "block"}`}><Link to="/tasks" style={{color:"green"}}>Tasks</Link></li>
+        <li className={`d-${!loggesIn ? "none" : "block"}`}><Link to="/blog" style={{color:"green"}}>Blog</Link></li>
+        <li><Link to="/contactUs" style={{color:"green"}}>Contact Us</Link></li>
+        <li className={`d-${!loggesIn ? "none" : "block"}`}><Link to="/webinar" style={{color:"green"}}>Webinar</Link></li>
       </ul>
       <div className={`d-flex`} style={{gap:"30px"}}>
       <button className={`btn btn-success d-${loggesIn ? "none" : "block"}`} onClick={handleNav}>Log in</button>

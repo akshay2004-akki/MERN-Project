@@ -286,7 +286,7 @@ function Home() {
             you live more sustainably.
           </p>
           <h3>Key Features:</h3>
-          <ul>
+          <ul style={{color:"green"}}>
             <li>Personalized Carbon Footprint Calculation</li>
             <li>Actionable Tips to Reduce Emissions</li>
             <li>Community Challenges and Leaderboards</li>

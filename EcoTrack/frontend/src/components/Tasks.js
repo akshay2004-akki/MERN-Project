@@ -65,11 +65,15 @@ function Tasks() {
   }
 
   return (
-    <div className="tasks-container" style={{transform:"translateY(90px)", height:"80vh", overflow:"scroll"}}>
-      <h2>Your Tasks</h2>
+    <div style={{backgroundImage: `
+      radial-gradient(circle at top left, rgba(138, 43, 226, 0.4), transparent 50%),
+      radial-gradient(circle at bottom right, rgba(138, 43, 226, 0.4), transparent 50%)
+    `,backgroundColor: '#121212', height:"100vh", transform:"translateY(-20px)"}}>
+      <div className="tasks-container" style={{ transform:"translateY(90px)", height:"80vh", overflow:"scroll", backgroundColor:"transparent"}}>
+      <h2 style={{color:"#fff", textAlign:"center"}}>Your Tasks</h2>
       <ul className="tasks-list">
         {tasks.map((task, index) => (
-          <li key={index} className={`task-item ${task.completed ? 'completed' : ''}`}>
+          <li key={index} className={`task-item ${task.completed ? 'completed' : ''}`} style={{backgroundColor:"#fff"}}>
             <input
               type="checkbox"
               checked={task.completed}
@@ -80,6 +84,7 @@ function Tasks() {
           </li>
         ))}
       </ul>
+    </div>
     </div>
   );
 }
