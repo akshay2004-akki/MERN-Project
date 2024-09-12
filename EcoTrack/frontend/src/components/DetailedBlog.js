@@ -71,7 +71,11 @@ function DetailedBlog() {
   }
 
   return (
-    <div style={{ transform: "translateY(90px)", padding: "20px" }}>
+    <div style={{backgroundImage: `
+      radial-gradient(circle at top left, rgba(138, 43, 226, 0.4), transparent 50%),
+      radial-gradient(circle at bottom right, rgba(138, 43, 226, 0.4), transparent 50%)
+    `,backgroundColor: '#121212', height:"130vh"}}>
+      <div style={{ transform: "translateY(90px)", padding: "20px" }}>
       <div
         className="detailed-blog-container"
       >
@@ -81,15 +85,16 @@ function DetailedBlog() {
           className="detailed-blog-image"
           style={{objectFit:"contain"}}
         />
-        <div className="detailed-blog-content-wrapper">
-          <h1 className="detailed-blog-title">{blog._doc.title}</h1>
-          <p className="detailed-blog-meta">
-            By {blog.author} |{" "}
+        <div className="detailed-blog-content-wrapper" style={{backgroundColor:"transparent",overflow:"scroll" }}>
+          <h1 className="detailed-blog-title" style={{color:"#fff"}}>{blog._doc.title}</h1>
+          <hr style={{backgroundColor:"#fff",}}/>
+          <p className="detailed-blog-meta" style={{color:"#fff"}}>
+            By <span style={{color:"aqua"}}>{blog.author} |{" "}</span>
             {new Date(blog._doc.createdAt).toLocaleDateString()}
           </p>
           <div className="detailed-blog-content">
             {blog._doc.content.split("\n").map((paragraph, index) => (
-              <p key={index} style={{ marginBottom: "15px" }}>
+              <p key={index} style={{ marginBottom: "15px", color:"#fff"}}>
                 {paragraph}
               </p>
             ))}
@@ -107,7 +112,7 @@ function DetailedBlog() {
               </button>
             </div>
             <div>
-              <button className="btn btn-outline-secondary detailed-blog-button">
+              <button className="btn btn-outline-secondary detailed-blog-button" style={{color:"#fff"}}>
                 Share <i className="fa fa-share-alt"></i>
               </button>
             </div>
@@ -115,7 +120,7 @@ function DetailedBlog() {
 
           {/* Comments Section */}
           <div className="detailed-blog-comments">
-            <h2 className="detailed-blog-title" style={{ fontSize: "1.8rem" }}>
+            <h2 className="detailed-blog-title" style={{ fontSize: "1.8rem", color:"#fff" }}>
               Comments
             </h2>
             <div
@@ -123,7 +128,7 @@ function DetailedBlog() {
             >
               {comments.length > 0 ? (
                 comments.map((comment, index) => (
-                  <div key={index} className="detailed-blog-comment">
+                  <div key={index} className="detailed-blog-comment" style={{color:"#111"}}>
                     <span className="detailed-blog-comment-owner">
                       {comment.owner.fullname}
                     </span>
@@ -134,12 +139,13 @@ function DetailedBlog() {
                   </div>
                 ))
               ) : (
-                <p>No comments yet.</p>
+                <p style={{color:"#fff"}}>No comments yet.</p>
               )}
             </div>
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
