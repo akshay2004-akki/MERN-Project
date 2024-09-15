@@ -106,7 +106,8 @@ function Webinar() {
               Submit
             </button>
           </form>
-          {message && <p className="message">{message}</p>}
+          <br />
+          {message && <p style={{color:"#fff"}} className="message">{message}</p>}
         </div>
       </div>
     </div>

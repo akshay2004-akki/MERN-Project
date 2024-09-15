@@ -232,6 +232,10 @@ function Home() {
 
   return (
     <>
+      <div style={{backgroundImage: `
+      radial-gradient(circle at top left, rgba(138, 43, 226, 0.4), transparent 50%),
+      radial-gradient(circle at bottom right, rgba(138, 43, 226, 0.4), transparent 50%)
+    `,backgroundColor: '#121212'}}>
       <div className="landing-page" style={{ height: "100vh" }}>
         <div
           className="content fade-in"
@@ -278,15 +282,15 @@ function Home() {
         style={{ height: "100vh" }}
       >
         <div className="about">
-          <h2>What is EcoTrack?</h2>
-          <p>
+          <h2 style={{color:"#fff"}}>What is <span style={{color:"aqua"}}>EcoTrack?</span></h2>
+          <p style={{color:"#fff"}}>
             EcoTrack is your personal guide to reducing your carbon footprint.
             Our platform helps you track your daily activities, monitor your
             impact on the environment, and provides actionable insights to help
             you live more sustainably.
           </p>
-          <h3>Key Features:</h3>
-          <ul style={{color:"green"}}>
+          <h3 style={{color:"aqua"}}>Key Features:</h3>
+          <ul style={{color:"#fff"}}>
             <li>Personalized Carbon Footprint Calculation</li>
             <li>Actionable Tips to Reduce Emissions</li>
             <li>Community Challenges and Leaderboards</li>
@@ -323,30 +327,31 @@ function Home() {
           justifyContent: "space-between",
           alignItems: "center",
           fontWeight: "500",
+          backgroundColor:"transparent"
         }}
       >
         <div
           className="working fade-in"
           ref={(el) => (contentRef.current[2] = el)}
         >
-          <h2>How It Works:</h2>
+          <h2 style={{color:"#fff"}}>How It Works:</h2>
           <div className="step">
-            <h3>Step 1: Track Your Activities</h3>
-            <p>
+            <h3 style={{color:"aqua"}}>Step 1: Track Your Activities</h3>
+            <p style={{color:"#fff"}}>
               Input your daily activities or sync with your apps to monitor your
               energy usage, transportation, and more.
             </p>
           </div>
           <div className="step">
-            <h3>Step 2: Get Insights</h3>
-            <p>
+            <h3 style={{color:"aqua"}}>Step 2: Get Insights</h3>
+            <p style={{color:"#fff"}}>
               Receive detailed reports and tips on how to reduce your carbon
               footprint based on your lifestyle.
             </p>
           </div>
           <div className="step">
-            <h3>Step 3: Take Action</h3>
-            <p>
+            <h3 style={{color:"aqua"}}>Step 3: Take Action</h3>
+            <p style={{color:"#fff"}}>
               Participate in eco-friendly challenges, offset your emissions, and
               share your progress with the EcoTrack community.
             </p>
@@ -389,17 +394,18 @@ function Home() {
             fontWeight: "500",
           }}
         >
-          <h2>Why Reduce Your Carbon Footprint?</h2>
-          <p>
+          <h2 style={{color:"#fff"}}>Why Reduce Your <span style={{color:"aqua"}}>Carbon Footprint</span>?</h2>
+          <p style={{color:"#fff"}}>
             Climate change is one of the biggest challenges facing our planet.
             By reducing your carbon footprint, you're taking an active role in
             protecting the environment, conserving natural resources, and
             ensuring a sustainable future for generations to come.
           </p>
-          <h3>Statistics:</h3>
+          <hr style={{height:"2px", backgroundColor:"#fff"}} />
+          <h3 style={{color:"lavender"}}>Statistics:</h3>
           <ul>
-            <li>70% of global carbon emissions come from cities.</li>
-            <li>
+            <li style={{color:"#fff"}}>70% of global carbon emissions come from cities.</li>
+            <li style={{color:"#fff"}}>
               Individual actions can collectively make a huge impact on global
               emissions.
             </li>
@@ -412,6 +418,7 @@ function Home() {
         >
           <HighchartsReact highcharts={Highcharts} options={chartOptions} />
         </div>
+      </div>
       </div>
     </>
   );

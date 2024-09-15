@@ -4,6 +4,6 @@ import { regiterWbinar } from '../controllers/webinar.cotroller.js'
 
 const router = Router()
 
-router.post("/register", verifyJWT, regiterWbinar)
+router.post("/register", regiterWbinar)
 
 export default router

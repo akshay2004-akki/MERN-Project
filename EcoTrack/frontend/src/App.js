@@ -16,6 +16,9 @@ import CreateBlog from './components/CreateBlog.js';
 import DetailedBlog from './components/DetailedBlog.js';
 import MyBlogs from './components/MyBlogs.js';
 import LeaderBoard from './components/LeaderBoard.js';
+import WasteSegregation from './components/WasteSegregation.js';
+import WasteDisposal from './components/WasteDisposal.js';
+import SanitizationAwareness from './components/SanitizationAwareness.js';
 
 function App() {
 
@@ -52,6 +55,9 @@ function App() {
           <Route path='/blogs/:blogId' element={<DetailedBlog/>} />
           <Route path='/myBlogs' element = {<MyBlogs/>} />
           <Route path='/leaderboard' element={<LeaderBoard/>} />
+          <Route path='/wasteSegregation' element= {<WasteSegregation/>}/>
+          <Route path='/wasteDisposal' element= {<WasteDisposal/>} />
+          <Route path='/sanitizationAwareness' element={<SanitizationAwareness/>}/>
         </Routes>
       </Router>
     </>
