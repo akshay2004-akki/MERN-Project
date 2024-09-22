@@ -25,7 +25,7 @@ function Webinar() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/v4/webinar/register",
+        `${process.env.REACT_APP_BASE_URL}/api/v4/webinar/register`,
         formData
       );
       setMessage(response.data.message || "Webinar registered successfully!");

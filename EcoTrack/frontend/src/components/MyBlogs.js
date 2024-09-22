@@ -10,7 +10,7 @@ function MyBlogs() {
     useEffect(()=>{
         try {
             const fetchUserBlogs = async ()=>{
-                const response = await axios.get("http://localhost:8000/api/v4/blogs/getPosts", {withCredentials:true})
+                const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/v4/blogs/getPosts`, {withCredentials:true})
                 console.log(response.data);
                 if(response.data.data.length===0){
                     setMessage(response.data.message)

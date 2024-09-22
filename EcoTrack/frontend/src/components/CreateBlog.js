@@ -22,7 +22,7 @@ const CreateBlog = () => {
     formData.append("coverImage", coverImage);
 
     try {
-      const response = await axios.post("http://localhost:8000/api/v4/blogs/create-blog", formData, {
+      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/v4/blogs/create-blog`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

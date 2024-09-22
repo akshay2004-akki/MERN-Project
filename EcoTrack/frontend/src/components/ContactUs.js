@@ -12,7 +12,7 @@ function ContactUs() {
   
     try {
       await axios.post(
-        "http://localhost:8000/api/v4/contactUs",
+        `${process.env.REACT_APP_BASE_URL}/api/v4/contactUs`,
         { name, email, message },
         { withCredentials: true }
       );

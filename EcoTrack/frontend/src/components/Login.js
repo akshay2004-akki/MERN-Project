@@ -19,7 +19,7 @@ const Login = ({ setIsLoggedIn, setAvatar }) => {
       password,
     };
 
-    axios.post("http://localhost:8000/api/v4/users/login", loginData, { withCredentials: true })
+    axios.post(`${process.env.REACT_APP_BASE_URL}/api/v4/users/login`, loginData, { withCredentials: true })
       .then((response) => {
         // Handle success
         setIsLoggedIn(true);

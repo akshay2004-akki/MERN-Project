@@ -8,7 +8,7 @@ function Tasks() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/v4/ai/getTasks", { withCredentials: true });
+        const response = await axios.get("${process.env.REACT_APP_BASE_URL}/api/v4/ai/getTasks", { withCredentials: true });
         const { tasks, lastGenerated } = response.data.data;
 
         if (!tasks || tasks.length === 0) {
@@ -33,7 +33,7 @@ function Tasks() {
 
     const regenerateTasks = async () => {
       try {
-        const response = await axios.post("http://localhost:8000/api/v4/ai/generate-task", {}, { withCredentials: true });
+        const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/v4/ai/generate-task`, {}, { withCredentials: true });
         setTasks(response.data.data);
       } catch (error) {
         console.error("Error generating tasks:", error);
@@ -54,7 +54,7 @@ function Tasks() {
     setTasks(updatedTasks);
 
     try {
-      await axios.put("http://localhost:8000/api/v4/ai/update-task", { tasksCompleted: updatedTasks }, { withCredentials: true });
+      await axios.put(`${process.env.REACT_APP_BASE_URL}/api/v4/ai/update-task`, { tasksCompleted: updatedTasks }, { withCredentials: true });
     } catch (error) {
       console.error("Error updating tasks:", error);
     }

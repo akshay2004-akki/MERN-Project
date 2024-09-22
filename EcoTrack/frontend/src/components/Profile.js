@@ -57,7 +57,7 @@ function Profile() {
   useEffect(() => {
     const fetchDetails = async () => {
       await axios
-        .get("http://localhost:8000/api/v4/users/user-details", {
+        .get(`${process.env.REACT_APP_BASE_URL}/api/v4/users/user-details`, {
           withCredentials: true,
         })
         .then((response) => {
@@ -81,7 +81,7 @@ function Profile() {
     const fetchData = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8000/api/v4/ai/getPrediction",
+          `${process.env.REACT_APP_BASE_URL}/api/v4/ai/getPrediction`,
           { withCredentials: true }
         );
         const formattedData = res.data.data

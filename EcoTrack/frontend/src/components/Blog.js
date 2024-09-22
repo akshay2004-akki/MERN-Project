@@ -19,7 +19,7 @@ const Blog = () => {
     const fetchBlogs = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/v4/blogs/getAllBlogs",
+          `${process.env.REACT_APP_BASE_URL}/api/v4/blogs/getAllBlogs`,
           {
             withCredentials: true,
           }
@@ -30,7 +30,7 @@ const Blog = () => {
             // console.log(blogs);
 
             const likesResponse = await axios.get(
-              `http://localhost:8000/api/v4/likes/${blog._id}`,
+              `${process.env.REACT_APP_BASE_URL}/api/v4/likes/${blog._id}`,
               {
                 withCredentials: true,
               }
@@ -38,7 +38,7 @@ const Blog = () => {
             const { likesCount } = likesResponse.data.data;
 
             const res = await axios.get(
-              `http://localhost:8000/api/v4/comments/${blog._id}`,
+              `${process.env.REACT_APP_BASE_URL}/api/v4/comments/${blog._id}`,
               { withCredentials: true }
             );
             const totalComments = res.data.data.totalComments;
@@ -59,13 +59,13 @@ const Blog = () => {
   const handleLikeToggle = async (blogId) => {
     try {
       await axios.post(
-        `http://localhost:8000/api/v4/likes/toggle/t/${blogId}`,
+        `${process.env.REACT_APP_BASE_URL}/api/v4/likes/toggle/t/${blogId}`,
         {},
         { withCredentials: true }
       );
 
       const updatedLikesResponse = await axios.get(
-        `http://localhost:8000/api/v4/likes/${blogId}`,
+        `${process.env.REACT_APP_BASE_URL}/api/v4/likes/${blogId}`,
         {
           withCredentials: true,
         }
@@ -86,7 +86,7 @@ const Blog = () => {
   const fetchComments = async (blogId, page = 1) => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/v4/comments/${blogId}?page=${page}`,
+        `${process.env.REACT_APP_BASE_URL}/api/v4/comments/${blogId}?page=${page}`,
         { withCredentials: true }
       );
       setComments(response.data.data.comment);
@@ -107,7 +107,7 @@ const Blog = () => {
   const handleCommentSubmit = async (blogId) => {
     try {
       await axios.post(
-        `http://localhost:8000/api/v4/comments/${blogId}`,
+        `${process.env.REACT_APP_BASE_URL}/api/v4/comments/${blogId}`,
         { content: commentText },
         { withCredentials: true }
       );
@@ -131,7 +131,7 @@ const Blog = () => {
   const handleDeleteComment = async (commentId) => {
     try {
       await axios
-        .delete(`http://localhost:8000/api/v4/comments/c/${commentId}`, {
+        .delete(`${process.env.REACT_APP_BASE_URL}/api/v4/comments/c/${commentId}`, {
           withCredentials: true,
         })
         .then((response) => {

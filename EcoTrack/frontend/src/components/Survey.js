@@ -21,7 +21,7 @@ const Survey = () => {
 
   useEffect(() => {
     // Check if a prediction exists for the user
-    axios.get("http://localhost:8000/api/v4/ai/getPrediction", { withCredentials: true })
+    axios.get(`${process.env.REACT_APP_BASE_URL}/api/v4/ai/getPrediction`, { withCredentials: true })
       .then((response) => {
         if (response.data.data) {
           setPredictionExists(true); // If prediction exists, set state

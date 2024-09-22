@@ -10,7 +10,7 @@ function LogOut() {
 
   const handleLogOut = async () => {
     try {
-      const res = await axios.post("http://localhost:8000/api/v4/users/logout", {}, { withCredentials: true });
+      const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/v4/users/logout`, {}, { withCredentials: true });
 
       // Clear localStorage
       localStorage.removeItem('isLoggedIn');

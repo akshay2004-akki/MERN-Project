@@ -14,20 +14,20 @@ function DetailedBlog() {
     const fetchFullBlog = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/v4/blogs/${blogId}`,
+          `${process.env.REACT_APP_BASE_URL}/api/v4/blogs/${blogId}`,
           { withCredentials: true }
         );
         const data = response.data.data;
         setBlog(data);
 
         const likesResponse = await axios.get(
-          `http://localhost:8000/api/v4/likes/${blogId}`,
+          `${process.env.REACT_APP_BASE_URL}/api/v4/likes/${blogId}`,
           { withCredentials: true }
         );
         setLikes(likesResponse.data.data.likesCount);
 
         const commentsResponse = await axios.get(
-          `http://localhost:8000/api/v4/comments/${blogId}`,
+          `${process.env.REACT_APP_BASE_URL}/api/v4/comments/${blogId}`,
           { withCredentials: true }
         );
         setComments(commentsResponse.data.data.comment);

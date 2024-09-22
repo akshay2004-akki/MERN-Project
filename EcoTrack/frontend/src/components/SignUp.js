@@ -27,7 +27,7 @@ function SignUp() {
     formData.append("role", role);
     formData.append("avatar", avatar);
     try {
-      await axios.post("http://localhost:8000/api/v4/users/register", formData, {
+      await axios.post(`${process.env.REACT_APP_BASE_URL}/api/v4/users/register`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
