@@ -62,7 +62,7 @@ const Survey = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8000/api/v4/ai/predict-carbon-footprint", formData, { withCredentials: true })
+    await axios.post(`${process.env.REACT_APP_BASE_URL}/api/v4/ai/predict-carbon-footprint`, formData, { withCredentials: true })
       .then((response) => {
         setRes(response.data.data.message);
         localStorage.setItem('surveyCompleted', true); // Mark the survey as completed

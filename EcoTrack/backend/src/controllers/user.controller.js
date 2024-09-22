@@ -208,8 +208,8 @@ export const refreshAccessToken = asyncHandler(async (req,res)=>{
         };
     
         const options = {
-            httpOnly : true,
-            secure : false
+            httpOnly : false,
+            secure : true
         }
     
         const {accessToken, newRefreshToken} = await getAccessAndRefreshToken(user._id)
