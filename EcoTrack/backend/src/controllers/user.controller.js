@@ -169,7 +169,7 @@ export const logOutUser = asyncHandler(async(req,res)=>{
         }
     )
     const options = {
-        httpOnly : true,
+        httpOnly : false,
         secure : true,
         sameSite : "strict",
     }
@@ -211,7 +211,7 @@ export const refreshAccessToken = asyncHandler(async (req,res)=>{
         };
     
         const options = {
-            httpOnly : true,
+            httpOnly : false,
             secure : true,
             sameSite : "strict",
         }
