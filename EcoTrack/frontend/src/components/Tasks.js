@@ -8,7 +8,7 @@ function Tasks() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get("${process.env.REACT_APP_BASE_URL}/api/v4/ai/getTasks", { withCredentials: true });
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/v4/ai/getTasks`, { withCredentials: true });
         const { tasks, lastGenerated } = response.data.data;
 
         if (!tasks || tasks.length === 0) {

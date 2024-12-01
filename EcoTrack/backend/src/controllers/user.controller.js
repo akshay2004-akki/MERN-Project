@@ -98,8 +98,8 @@ export const registerUser = asyncHandler(async(req,res)=>{
         res.status(401).send("Avatar is required");
         throw new ApiError("Avatar is required")
     }
-
-    const avatar = await uploadOnCloudinary(avatarLocalPath)
+ 
+    const avatar = await uploadOnCloudinary(avatarLocalPath) 
 
     const newUser = await User.create({
         fullName,
@@ -143,9 +143,9 @@ export const loginUser = asyncHandler(async(req,res)=>{
     const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
 
     const options = {
-        httpOnly : false,
-        secure : true,
-        sameSite : "strict",
+        httpOnly : true,
+        secure : false,
+        // sameSite : "strict",
         // sameSite:"strict"
     }
 
@@ -169,9 +169,9 @@ export const logOutUser = asyncHandler(async(req,res)=>{
         }
     )
     const options = {
-        httpOnly : false,
-        secure : true,
-        sameSite : "strict",
+        httpOnly : true,
+        secure : false,
+        // sameSite : "strict",
     }
 
     return res
@@ -211,9 +211,9 @@ export const refreshAccessToken = asyncHandler(async (req,res)=>{
         };
     
         const options = {
-            httpOnly : false,
-            secure : true,
-            sameSite : "strict",
+            httpOnly : true,
+            secure : false,
+            // sameSite : "strict",
         }
     
         const {accessToken, newRefreshToken} = await getAccessAndRefreshToken(user._id)

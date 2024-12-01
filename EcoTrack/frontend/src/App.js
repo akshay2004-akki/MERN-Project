@@ -19,6 +19,7 @@ import LeaderBoard from './components/LeaderBoard.js';
 import WasteSegregation from './components/WasteSegregation.js';
 import WasteDisposal from './components/WasteDisposal.js';
 import SanitizationAwareness from './components/SanitizationAwareness.js';
+import UserProfile from './components/UserProfile.js';
 
 function App() {
 
@@ -58,6 +59,7 @@ function App() {
           <Route path='/wasteSegregation' element= {<WasteSegregation/>}/>
           <Route path='/wasteDisposal' element= {<WasteDisposal/>} />
           <Route path='/sanitizationAwareness' element={<SanitizationAwareness/>}/>
+          <Route path='userProfile' element={<UserProfile/>} />
         </Routes>
       </Router>
     </>

@@ -45,14 +45,6 @@ function About() {
           <img  src={akash} alt="Team Member 4" className="gallery-image" />
           <div className="image-text">Akash Kumar: Sustainability Expert</div>
         </div>
-        <div className="gallery-item">
-          <img  src={akanksha} alt="Team Member 4" className="gallery-image" />
-          <div className="image-text">Akanksha Raj: UX/UI Designer</div>
-        </div>
-        <div className="gallery-item">
-          <img  src={adrash} alt="Team Member 4" className="gallery-image" />
-          <div className="image-text">Adrash Kumar: Sustainability Expert</div>
-        </div>
       </div>
     </div>
   );
